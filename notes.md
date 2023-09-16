@@ -1,0 +1,2 @@
+# 9-16-23 - First Notes
+Today I learned about GitHub from my first GitHub assignment. I learned that I need to stage, commit, and push when making changes to either a local machine or GitHub. I need to pull changes from either file to get them. Don't alter both files without committing and pushing, but if you do, merge conflicts can be handles in VS Code and probably in GitHub. Keep files in the 'startup' Git Repository.
