@@ -24,17 +24,17 @@ Want to keep your brain healthy by incorporating logical thinking into your dail
 ### Technology Use
 I am going to use the required technologies in the following ways.
 
-- **HTML** - Uses correct HTML structure for application. Two HTML pages. One for login and one for gameplay.
+- **HTML** - Uses correct HTML structure for application. Four HTML pages. One for login, one for gameplay, one for scores, and one for information.
 - **CSS** - Application styling that looks good on different screen sizes, uses good whitespace, color choice and contrast.
-- **JavaScript** - Provides login, color choice display, playing chip insertion, display other users' game initiation and high scores, backend endpoint calls.
+- **JavaScript** - Provides login, color choice display, playing chip insertion, display other users' game initiation and high scores.
 - **Service** - Backend service with endpoints for:
   - login
-  - retrieving choices
-  - submitting votes
-  - retrieving vote status
-- **DB** - Store users, choices, and votes in database.
-- **Login** - Register and login users. Credentials securely stored in database. Can't vote unless authenticated.
-- **WebSocket** - As each user votes, their votes are broadcast to all other users.
+  - retrieving player column selection
+  - submitting column selection
+  - retrieving game/win status
+- **DB** - Store users, column options, and user column selection in database.
+- **Login** - Register and login users. Credentials securely stored in database. Can't play unless authenticated.
+- **WebSocket** - As each user starts a game, their game status is broadcast to all other users.
 - **React** - Application ported to use the React web framework.
 
 
