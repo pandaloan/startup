@@ -12,7 +12,7 @@ Want to keep your brain healthy by incorporating logical thinking into your dail
 ### Key Features
 - Secure login over HTTPS
 - Display of game board
-- Ability to select a column to place a playing chip in
+- Ability to select a column to place a playing chip in it
 - Player vs Player local gameplay
 - Notification of game win
 - Game results are persistently stored
