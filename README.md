@@ -11,7 +11,6 @@ Want to keep your brain healthy by incorporating logical thinking into your dail
 
 ### Key Features
 - Secure login over HTTPS
-- Ability to select player chip color
 - Display of game board
 - Ability to select a column to place a playing chip in
 - Player vs Player local gameplay
@@ -26,7 +25,7 @@ I am going to use the required technologies in the following ways.
 
 - **HTML** - Uses correct HTML structure for application. Four HTML pages. One for login, one for gameplay, one for scores, and one for information.
 - **CSS** - Application styling that looks good on different screen sizes, uses good whitespace, color choice and contrast.
-- **JavaScript** - Provides login, color choice display, playing chip insertion, display other users' game initiation and high scores.
+- **JavaScript** - Provides login, playing chip insertion, display other users' game initiation and high scores.
 - **Service** - Backend service with endpoints for:
   - login
   - retrieving player column selection
