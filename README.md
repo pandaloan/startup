@@ -40,3 +40,5 @@ I am going to use the required technologies in the following ways.
 
 
 ### Sketches
+![Home](https://github.com/pandaloan/startup/assets/112591146/551197b5-fa95-4d6d-8953-bc2c36d86f2d)
+
