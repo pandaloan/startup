@@ -55,7 +55,7 @@ For this deliverable I built out the structure of my application using HTML.
 
 - **HTML pages** - Four HTML page that represent the ability to login, learn about the game, view player scores, and play Connect4.
 - **Links** - The each page links to each of the other three pages and to my GitHub repo.
-- **Text** - Each of the voting choices is represented by a textual description.
+- **Text** - The About page has text describing the game.
 - **Images** - An image of a quokka is included on the About page. Later, random quokka pictures will be placed there, a different one each time the page is loaded. SVGs are included on the Play! page.
 - **Login** - Input box and submit button for login.
 - **Database** - The previous player scores listed on the Scores page represent data pulled from the database.
