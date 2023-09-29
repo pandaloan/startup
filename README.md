@@ -53,11 +53,11 @@ I am going to use the required technologies in the following ways.
 
 For this deliverable I built out the structure of my application using HTML.
 
-- **HTML pages** - Four HTML page that represent the ability to login, learn about the game, view player scores, and play Connect4.
-- **Links** - The each page links to each of the other three pages and to my GitHub repo.
+- **HTML pages** - Four HTML pages that represent the ability to login, learn about the game, view player scores, and play Connect4.
+- **Links** - Each page links to each of the other three pages and to my GitHub repo.
 - **Text** - The About page has text describing the game.
 - **Images** - An image of a quokka is included on the About page. Later, random quokka pictures will be placed there, a different one each time the page is loaded. SVGs are included on the Play! page.
-- **Login** - Input box and submit button for login.
+- **Login** - Input box and submit button for login on Home page.
 - **Database** - The previous player scores listed on the Scores page represent data pulled from the database.
 - **WebSocket** - The display of other players' games and wins on the Play! page represent realtime player activity.
 
