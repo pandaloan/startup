@@ -4,18 +4,381 @@
     <meta charset="UTF-8" />
     <!-- Tell browsers not to scale the viewport automatically -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Play!</title>
+    <link rel="icon" href="https://www.101computing.net/wp/wp-content/uploads/connect4.png" />
+
+    <link rel="stylesheet" href="main.css" />
+    <link rel="stylesheet" href="play.css" />
+
+    <!-- Include bootstrap CSS framework -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body > <!--class="bg-dark text-light" on this line inside body bracket - review simon css html--> 
+    <header class="container-fluid">
+      <nav class="navbar fixed-top navbar-dark">
+        <a class="navbar-brand" href="#">Connect4<sup>&reg;</sup></a>
+        <p>connected to the internet</p>
+        <menu class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="about.html">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="scores.html">Scores</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="play.html">Play!</a>
+          </li>
+        </menu>
+      </nav>
+    </header>
+
+    <main>
+      <main>
+        <div class="players">
+          Player:
+          <span class="player-name">Mystery player</span>
+        </div>
+        <ul class="notification">
+          <li class="player-name">R2-D2 started a new game</li>
+          <li class="player-name">C-3PO started a new game</li>
+          <li class="player-name">R2-D2 scored 1138</li>
+          <li class="player-name">The Wookiee won!</li>
+        </ul>
+  
+        <!-- More formatting with old style HTML -->
+        <br />
+  
+        <div>
+          <label for="count">Player 1 Score</label>
+          <input type="text" id="count" value="--" readonly />
+        </div>
+        <div>
+          <label for="count">Player 2 Score</label>
+          <input type="text" id="count" value="--" readonly />
+        </div>
+  
+        <br />
+  
+        <div>
+          <button type="button" class="btn btn-secondary">Restart</button>
+        </div>
+        <div>
+          <button type="button" class="btn btn-warning">Undo</button>
+        </div>
+  
+        <br />
+  
+        <div>
+          <table>
+              <tr>
+                  <td>
+                      <svg aria-hidden="true" viewbox="0 0 100 100" height="50" width="50">
+                          <circle cx="50" cy="50" r="50" fill="yellow" />
+                      </svg>
+                  </td>
+                  <td>
+                      <svg aria-hidden="true" viewbox="0 0 100 100" height="50" width="50">
+                          <circle cx="50" cy="50" r="50" fill="red" />
+                      </svg>
+                  </td>
+              </tr>
+          </table>
+        </div>
+        <div>
+          <table class="board">
+              <tr> <!--row 1-->
+                  <td> <!--column 1-->
+                      <svg width="50" height="50">
+                          <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
+                        </svg>
+                  </td>
+                  <td> <!--column 2-->
+                      <svg width="50" height="50">
+                          <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
+                        </svg>
+                  </td>
+                  <td> <!--column 3-->
+                      <svg width="50" height="50">
+                          <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
+                        </svg>
+                  </td>
+                  <td> <!--column 4-->
+                      <svg width="50" height="50">
+                          <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
+                        </svg>
+                  </td>
+                  <td> <!--column 5-->
+                      <svg width="50" height="50">
+                          <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
+                        </svg>
+                  </td>
+                  <td> <!--column 6-->
+                      <svg width="50" height="50">
+                          <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
+                        </svg>
+                  </td>
+                  <td> <!--column 7-->
+                      <svg width="50" height="50">
+                          <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
+                        </svg>
+                  </td>
+              </tr>
+              <tr> <!--row 2-->
+                  <td> <!--column 1-->
+                      <svg width="50" height="50">
+                          <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
+                        </svg>
+                  </td>
+                  <td> <!--column 2-->
+                      <svg width="50" height="50">
+                          <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
+                        </svg>
+                  </td>
+                  <td> <!--column 3-->
+                      <svg width="50" height="50">
+                          <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
+                        </svg>
+                  </td>
+                  <td> <!--column 4-->
+                      <svg width="50" height="50">
+                          <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
+                        </svg>
+                  </td>
+                  <td> <!--column 5-->
+                      <svg width="50" height="50">
+                          <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
+                        </svg>
+                  </td>
+                  <td> <!--column 6-->
+                      <svg width="50" height="50">
+                          <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
+                        </svg>
+                  </td>
+                  <td> <!--column 7-->
+                      <svg width="50" height="50">
+                          <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
+                        </svg>
+                  </td>
+              </tr>
+              <tr> <!--row 3-->
+                  <td> <!--column 1-->
+                      <svg width="50" height="50">
+                          <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
+                        </svg>
+                  </td>
+                  <td> <!--column 2-->
+                      <svg width="50" height="50">
+                          <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
+                        </svg>
+                  </td>
+                  <td> <!--column 3-->
+                      <svg width="50" height="50">
+                          <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
+                        </svg>
+                  </td>
+                  <td> <!--column 4-->
+                      <svg width="50" height="50">
+                          <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
+                        </svg>
+                  </td>
+                  <td> <!--column 5-->
+                      <svg width="50" height="50">
+                          <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
+                        </svg>
+                  </td>
+                  <td> <!--column 6-->
+                      <svg width="50" height="50">
+                          <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
+                        </svg>
+                  </td>
+                  <td> <!--column 7-->
+                      <svg width="50" height="50">
+                          <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
+                        </svg>
+                  </td>
+              </tr>
+              <tr> <!--row 4-->
+                  <td> <!--column 1-->
+                      <svg width="50" height="50">
+                          <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
+                        </svg>
+                  </td>
+                  <td> <!--column 2-->
+                      <svg width="50" height="50">
+                          <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
+                        </svg>
+                  </td>
+                  <td> <!--column 3-->
+                      <svg width="50" height="50">
+                          <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
+                        </svg>
+                  </td>
+                  <td> <!--column 4-->
+                      <svg width="50" height="50">
+                          <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
+                        </svg>
+                  </td>
+                  <td> <!--column 5-->
+                      <svg width="50" height="50">
+                          <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
+                        </svg>
+                  </td>
+                  <td> <!--column 6-->
+                      <svg width="50" height="50">
+                          <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
+                        </svg>
+                  </td>
+                  <td> <!--column 7-->
+                      <svg width="50" height="50">
+                          <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
+                        </svg>
+                  </td>
+              </tr>
+              <tr> <!--row 5-->
+                  <td> <!--column 1-->
+                      <svg width="50" height="50">
+                          <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
+                        </svg>
+                  </td>
+                  <td> <!--column 2-->
+                      <svg width="50" height="50">
+                          <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
+                        </svg>
+                  </td>
+                  <td> <!--column 3-->
+                      <svg width="50" height="50">
+                          <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
+                        </svg>
+                  </td>
+                  <td> <!--column 4-->
+                      <svg width="50" height="50">
+                          <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
+                        </svg>
+                  </td>
+                  <td> <!--column 5-->
+                      <svg width="50" height="50">
+                          <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
+                        </svg>
+                  </td>
+                  <td> <!--column 6-->
+                      <svg width="50" height="50">
+                          <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
+                        </svg>
+                  </td>
+                  <td> <!--column 7-->
+                      <svg width="50" height="50">
+                          <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
+                        </svg>
+                  </td>
+              </tr>
+              <tr> <!--row 6-->
+                  <td> <!--column 1-->
+                      <svg width="50" height="50">
+                          <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
+                        </svg>
+                  </td>
+                  <td> <!--column 2-->
+                      <svg width="50" height="50">
+                          <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
+                        </svg>
+                  </td>
+                  <td> <!--column 3-->
+                      <svg width="50" height="50">
+                          <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
+                        </svg>
+                  </td>
+                  <td> <!--column 4-->
+                      <svg width="50" height="50">
+                          <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
+                        </svg>
+                  </td>
+                  <td> <!--column 5-->
+                      <svg width="50" height="50">
+                          <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
+                        </svg>
+                  </td>
+                  <td> <!--column 6-->
+                      <svg width="50" height="50">
+                          <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
+                        </svg>
+                  </td>
+                  <td> <!--column 7-->
+                      <svg width="50" height="50">
+                          <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
+                        </svg>
+                  </td>
+              </tr>
+              <tr> <!--playing chip insertion buttons-->
+                  <td>
+                    <button type="button" class="btn btn-info">1</button>
+                  </td>
+                  <td>
+                    <button type="button" class="btn btn-info">2</button>
+                  </td>
+                  <td>
+                    <button type="button" class="btn btn-info">3</button>
+                  </td>
+                  <td>
+                    <button type="button" class="btn btn-info">4</button>
+                  </td>
+                  <td>
+                    <button type="button" class="btn btn-info">5</button>
+                  </td>
+                  <td>
+                    <button type="button" class="btn btn-info">6</button>
+                  </td>
+                  <td>
+                    <button type="button" class="btn btn-info">7</button>
+                  </td>
+              </tr>
+          </table>
+        </div>
+        <div>
+          <svg aria-hidden="true" viewbox="100 100 100 100" height="50" width="50" fill="red"></svg>
+        </div>
+    </main>
+
+    <footer > <!--class="bg-dark text-white-50" inside footer bracket - review simon css html file-->
+      <div class="container-fluid">
+        <span class="text-reset">Author Name(s):</span>
+        <p>Albino Chipmunk</p>
+        <a class="text-reset" href="https://github.com/pandaloan/startup.git">GitHub</a>
+      </div>
+    </footer>
+  </body>
+</html>
+
+
+
+
+
+
+<!--<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Tell browsers not to scale the viewport automatically ->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Simon</title>
     <link rel="icon" href="https://www.101computing.net/wp/wp-content/uploads/connect4.png" />
   </head>
   <body>
-    <!-- Use header, main, and footer elements to give semantic structure -->
+    <!-- Use header, main, and footer elements to give semantic structure ->
     <header>
       <h1>Connect4<sup>&reg;</sup></h1>
       <h3>connected to the internet</h3>
 
       <!-- Navigation elements -->
       <nav>
-        <!-- Menu is a semantic alternative to <ul> that represents an interaction -->
+        <!-- Menu is a semantic alternative to <ul> that represents an interaction ->
         <menu>
           <li><a href="index.html">Home</a></li>
           <li><a href="about.html">About</a></li>
@@ -24,7 +387,7 @@
         </menu>
       </nav>
 
-      <!-- Since we don't have the ability to style we use old style HTML to give some visual formatting -->
+      <!-- Since we don't have the ability to style we use old style HTML to give some visual formatting ->
       <hr />
     </header>
 
@@ -40,7 +403,7 @@
         <li class="player-name">The Wookiee won!</li>
       </ul>
 
-      <!-- More formatting with old style HTML -->
+      <!-- More formatting with old style HTML ->
       <br />
 
       <div>
@@ -81,229 +444,229 @@
       </div>
       <div>
         <table>
-            <tr> <!--row 1-->
-                <td> <!--column 1-->
+            <tr> <!--row 1->
+                <td> <!--column 1->
                     <svg width="50" height="50">
                         <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
                       </svg>
                 </td>
-                <td> <!--column 2-->
+                <td> <!--column 2->
                     <svg width="50" height="50">
                         <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
                       </svg>
                 </td>
-                <td> <!--column 3-->
+                <td> <!--column 3->
                     <svg width="50" height="50">
                         <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
                       </svg>
                 </td>
-                <td> <!--column 4-->
+                <td> <!--column 4->
                     <svg width="50" height="50">
                         <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
                       </svg>
                 </td>
-                <td> <!--column 5-->
+                <td> <!--column 5->
                     <svg width="50" height="50">
                         <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
                       </svg>
                 </td>
-                <td> <!--column 6-->
+                <td> <!--column 6->
                     <svg width="50" height="50">
                         <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
                       </svg>
                 </td>
-                <td> <!--column 7-->
-                    <svg width="50" height="50">
-                        <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
-                      </svg>
-                </td>
-            </tr>
-            <tr> <!--row 2-->
-                <td> <!--column 1-->
-                    <svg width="50" height="50">
-                        <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
-                      </svg>
-                </td>
-                <td> <!--column 2-->
-                    <svg width="50" height="50">
-                        <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
-                      </svg>
-                </td>
-                <td> <!--column 3-->
-                    <svg width="50" height="50">
-                        <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
-                      </svg>
-                </td>
-                <td> <!--column 4-->
-                    <svg width="50" height="50">
-                        <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
-                      </svg>
-                </td>
-                <td> <!--column 5-->
-                    <svg width="50" height="50">
-                        <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
-                      </svg>
-                </td>
-                <td> <!--column 6-->
-                    <svg width="50" height="50">
-                        <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
-                      </svg>
-                </td>
-                <td> <!--column 7-->
+                <td> <!--column 7->
                     <svg width="50" height="50">
                         <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
                       </svg>
                 </td>
             </tr>
-            <tr> <!--row 3-->
-                <td> <!--column 1-->
+            <tr> <!--row 2->
+                <td> <!--column 1->
                     <svg width="50" height="50">
                         <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
                       </svg>
                 </td>
-                <td> <!--column 2-->
+                <td> <!--column 2->
                     <svg width="50" height="50">
                         <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
                       </svg>
                 </td>
-                <td> <!--column 3-->
+                <td> <!--column 3->
                     <svg width="50" height="50">
                         <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
                       </svg>
                 </td>
-                <td> <!--column 4-->
+                <td> <!--column 4->
                     <svg width="50" height="50">
                         <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
                       </svg>
                 </td>
-                <td> <!--column 5-->
+                <td> <!--column 5->
                     <svg width="50" height="50">
                         <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
                       </svg>
                 </td>
-                <td> <!--column 6-->
+                <td> <!--column 6->
                     <svg width="50" height="50">
                         <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
                       </svg>
                 </td>
-                <td> <!--column 7-->
-                    <svg width="50" height="50">
-                        <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
-                      </svg>
-                </td>
-            </tr>
-            <tr> <!--row 4-->
-                <td> <!--column 1-->
-                    <svg width="50" height="50">
-                        <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
-                      </svg>
-                </td>
-                <td> <!--column 2-->
-                    <svg width="50" height="50">
-                        <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
-                      </svg>
-                </td>
-                <td> <!--column 3-->
-                    <svg width="50" height="50">
-                        <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
-                      </svg>
-                </td>
-                <td> <!--column 4-->
-                    <svg width="50" height="50">
-                        <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
-                      </svg>
-                </td>
-                <td> <!--column 5-->
-                    <svg width="50" height="50">
-                        <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
-                      </svg>
-                </td>
-                <td> <!--column 6-->
-                    <svg width="50" height="50">
-                        <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
-                      </svg>
-                </td>
-                <td> <!--column 7-->
+                <td> <!--column 7->
                     <svg width="50" height="50">
                         <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
                       </svg>
                 </td>
             </tr>
-            <tr> <!--row 5-->
-                <td> <!--column 1-->
+            <tr> <!--row 3->
+                <td> <!--column 1->
                     <svg width="50" height="50">
                         <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
                       </svg>
                 </td>
-                <td> <!--column 2-->
+                <td> <!--column 2->
                     <svg width="50" height="50">
                         <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
                       </svg>
                 </td>
-                <td> <!--column 3-->
+                <td> <!--column 3->
                     <svg width="50" height="50">
                         <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
                       </svg>
                 </td>
-                <td> <!--column 4-->
+                <td> <!--column 4->
                     <svg width="50" height="50">
                         <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
                       </svg>
                 </td>
-                <td> <!--column 5-->
+                <td> <!--column 5->
                     <svg width="50" height="50">
                         <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
                       </svg>
                 </td>
-                <td> <!--column 6-->
+                <td> <!--column 6->
                     <svg width="50" height="50">
                         <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
                       </svg>
                 </td>
-                <td> <!--column 7-->
-                    <svg width="50" height="50">
-                        <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
-                      </svg>
-                </td>
-            </tr>
-            <tr> <!--row 6-->
-                <td> <!--column 1-->
-                    <svg width="50" height="50">
-                        <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
-                      </svg>
-                </td>
-                <td> <!--column 2-->
-                    <svg width="50" height="50">
-                        <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
-                      </svg>
-                </td>
-                <td> <!--column 3-->
-                    <svg width="50" height="50">
-                        <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
-                      </svg>
-                </td>
-                <td> <!--column 4-->
-                    <svg width="50" height="50">
-                        <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
-                      </svg>
-                </td>
-                <td> <!--column 5-->
-                    <svg width="50" height="50">
-                        <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
-                      </svg>
-                </td>
-                <td> <!--column 6-->
-                    <svg width="50" height="50">
-                        <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
-                      </svg>
-                </td>
-                <td> <!--column 7-->
+                <td> <!--column 7->
                     <svg width="50" height="50">
                         <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
                       </svg>
                 </td>
             </tr>
-            <tr> <!--playing chip insertion buttons-->
+            <tr> <!--row 4->
+                <td> <!--column 1->
+                    <svg width="50" height="50">
+                        <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
+                      </svg>
+                </td>
+                <td> <!--column 2->
+                    <svg width="50" height="50">
+                        <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
+                      </svg>
+                </td>
+                <td> <!--column 3->
+                    <svg width="50" height="50">
+                        <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
+                      </svg>
+                </td>
+                <td> <!--column 4->
+                    <svg width="50" height="50">
+                        <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
+                      </svg>
+                </td>
+                <td> <!--column 5->
+                    <svg width="50" height="50">
+                        <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
+                      </svg>
+                </td>
+                <td> <!--column 6->
+                    <svg width="50" height="50">
+                        <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
+                      </svg>
+                </td>
+                <td> <!--column 7->
+                    <svg width="50" height="50">
+                        <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
+                      </svg>
+                </td>
+            </tr>
+            <tr> <!--row 5->
+                <td> <!--column 1->
+                    <svg width="50" height="50">
+                        <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
+                      </svg>
+                </td>
+                <td> <!--column 2->
+                    <svg width="50" height="50">
+                        <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
+                      </svg>
+                </td>
+                <td> <!--column 3->
+                    <svg width="50" height="50">
+                        <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
+                      </svg>
+                </td>
+                <td> <!--column 4->
+                    <svg width="50" height="50">
+                        <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
+                      </svg>
+                </td>
+                <td> <!--column 5->
+                    <svg width="50" height="50">
+                        <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
+                      </svg>
+                </td>
+                <td> <!--column 6->
+                    <svg width="50" height="50">
+                        <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
+                      </svg>
+                </td>
+                <td> <!--column 7->
+                    <svg width="50" height="50">
+                        <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
+                      </svg>
+                </td>
+            </tr>
+            <tr> <!--row 6->
+                <td> <!--column 1->
+                    <svg width="50" height="50">
+                        <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
+                      </svg>
+                </td>
+                <td> <!--column 2->
+                    <svg width="50" height="50">
+                        <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
+                      </svg>
+                </td>
+                <td> <!--column 3->
+                    <svg width="50" height="50">
+                        <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
+                      </svg>
+                </td>
+                <td> <!--column 4->
+                    <svg width="50" height="50">
+                        <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
+                      </svg>
+                </td>
+                <td> <!--column 5->
+                    <svg width="50" height="50">
+                        <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
+                      </svg>
+                </td>
+                <td> <!--column 6->
+                    <svg width="50" height="50">
+                        <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
+                      </svg>
+                </td>
+                <td> <!--column 7->
+                    <svg width="50" height="50">
+                        <rect width="50" height="50" style="fill:rgb(0,0,255);stroke-width:5;stroke:rgb(0,0,0)" />
+                      </svg>
+                </td>
+            </tr>
+            <tr> <!--playing chip insertion buttons->
                 <td>
                     <button>1</button>
                 </td>
@@ -375,7 +738,7 @@
             </td>
           </tr>
         </table>
-      </div>-->
+      </div>->
     </main>
 
     <footer>
@@ -386,4 +749,4 @@
       <a href="https://github.com/pandaloan/startup.git">GitHub</a>
     </footer>
   </body>
-</html>
+</html>-->
