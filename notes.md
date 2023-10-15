@@ -5,9 +5,25 @@ Today I learned about GitHub from my first GitHub assignment. I learned that I n
 - vi - to enter insert mode, press i. to return to command mode, press esc. to exit from command mode, press q. 
 - To save and quit, be in command mode, then type :wq
 - place single quotes '' around files and directories that have spaces in their names when entering them into the terminal
+- cd .. to go to parent directory
 
 
 # 9-22-23 - Server
 - Stopping a server is NOT the same as terminating it
 - Assigning an elastic IP address will change the IP address for your server, but it will not change again until you release the elastic IP address. If you do terminate your server and create a new one, you can again associate the same elastic IP address with your new server.
 - Note that your elastic IP address is allocated until your release it, not until you terminate your instance. So make sure you release it when you no longer need it. Otherwise you will get a nasty $3 bill every month.
+
+# 10-14-23 - Deployment
+- enter in terminal to deploy to startup: (deploy while in startup directory)
+./deployFiles.sh -k ~/[key file directory] -h albinochipmunk.click -s startup
+- to deploy to simon: (deploy while in Simon/simon-css or simon-html or simon-whatever)
+./deployFiles.sh -k ~/[key file directory] -h albinochipmunk.click -s startup
+
+# 10-14-23 - Comments
+- <!----> to comment in html
+- /**/ to comment in css
+
+# 10-14-23 - CSS
+- use sticky head and footer
+- make sure home login button works
+
