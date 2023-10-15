@@ -9,6 +9,10 @@ body {
     background-color: rgb(235, 235, 83);
     color: red;
   }
+
+  header .navbar-brand {
+    color: red;
+  }
   
   main {
     flex: 1 calc(100vh - 110px);
