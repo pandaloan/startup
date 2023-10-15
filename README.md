@@ -61,5 +61,17 @@ For this deliverable I built out the structure of my application using HTML.
 - **Database** - The previous player scores listed on the Scores page represent data pulled from the database.
 - **WebSocket** - The display of other players' games and wins on the Play! page represent realtime player activity.
 
+## CSS deliverable
+
+For this deliverable I built out the style of my application using CSS.
+
+- **Header, footer, and main content body** - I changed the color and made them 'sticky'.
+- **Navigation elements** - I changed the color and changed the format to row rather than column.
+- **Responsive to window resizing** - My website changes appearance and element size based on window size and device.
+- **Application elements** - Used color, contrast, and whitespace.
+- **Application text content** - Consistent fonts.
+- **Application images** - Image in browser bar and on About page.
+
+
 
 
