@@ -27,15 +27,14 @@ Today I learned about GitHub from my first GitHub assignment. I learned that I n
 - use sticky head and footer
 - make sure home login button works
 
-#10-14-23
-- short javascript program
-- function testAll(input, tester) { //if tester is true for each value of input, testAll returns true
+# 10-14-23 - short javascript program - array assignment
+  function testAll(input, tester) { //if tester is true for each value of input, testAll returns true
   const result = input.every(tester) // Your code here
   return result
-}
+  }
 
-const result = testAll(['a', 'b', 'c', 'd'], (theInput) => theInput.length > 3); //if theInput > 3, arrowFunction returns true
+  const result = testAll(['a', 'b', 'c', 'd'], (theInput) => theInput.length > 3); //if theInput > 3, arrowFunction returns true
 
-console.log(result);
+  console.log(result);
 
 
