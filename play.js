@@ -159,7 +159,6 @@ function setWinner(r, c) {
     let winner = document.getElementById("winner");
     if (board[r][c] == playerRed) {
         winner.innerText = "Red Wins";
-        
         //const score = "red wins"             
     } else {
         winner.innerText = "Yellow Wins";
@@ -179,7 +178,7 @@ setInterval(() => {
       `<div class="event"><span class="player-event">Ahsoka</span> scored ${score}</div>` + chatText.innerHTML;
   }, 5000);
 
-/*class scoresStuff{
+class scoresStuff{
   saveScore(score) {
     const userName = this.getPlayerName();
     let scores = [];
@@ -215,5 +214,5 @@ setInterval(() => {
 
     return scores;
   }
-}*/
+}
 
