@@ -46,22 +46,23 @@ window.onload = function() {
 }
 
 function setGame() {
-    board = [];
+    board = []; //board starts out empty
     currColumns = [5, 5, 5, 5, 5, 5, 5];
 
-    for (let r = 0; r < rows; r++) {
+    for (let r = 0; r < rows; r++) { //rows are numbered 0-5
         let row = [];
-        for (let c = 0; c < columns; c++) {
+        for (let c = 0; c < columns; c++) { //columns are numbered 0-6
             // JS
             row.push(' ');
             // HTML
-            let tile = document.createElement("div");
-            tile.id = r.toString() + "-" + c.toString();
-            tile.classList.add("tile");
+            // <div id="0-0" class="tile"></div>
+            let tile = document.createElement("div"); //populate board with 42 tiles - create 24 div elements in html
+            tile.id = r.toString() + "-" + c.toString(); //id="rowNumber-colNumber"
+            tile.classList.add("tile"); //class called tile
             tile.addEventListener("click", setPiece);
-            document.getElementById("board").append(tile);
+            document.getElementById("board2").append(tile); //append tiles to board2 in play.html
         }
-        board.push(row);
+        board.push(row); //adds row to javascript board
     }
 }
 
