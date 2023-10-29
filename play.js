@@ -27,8 +27,13 @@ setInterval(() => {
 
 
 
+
+//const playerNameEl = document.querySelector('.player-name');
+//playerNameEl.textContent = this.getPlayerName();
+
 //tutorial
   
+
 
 var playerRed = "R";
 var playerYellow = "Y";
@@ -153,16 +158,62 @@ function checkWinner() {
 function setWinner(r, c) {
     let winner = document.getElementById("winner");
     if (board[r][c] == playerRed) {
-        winner.innerText = "Red Wins";             
+        winner.innerText = "Red Wins";
+        
+        //const score = "red wins"             
     } else {
         winner.innerText = "Yellow Wins";
+        //gameOver = true;
+        //const score = "yellow wins"
     }
     gameOver = true;
+    //saveScore(score); //check this stuff
+    //updateScores(username, score, scores); //check this stuff
 }
+
 
 setInterval(() => {
     const score = Math.floor(Math.random() * 3000);
     const chatText = document.querySelector('#player-messages');
     chatText.innerHTML =
-      `<div class="event"><span class="player-event">Eich</span> scored ${score}</div>` + chatText.innerHTML;
+      `<div class="event"><span class="player-event">Ahsoka</span> scored ${score}</div>` + chatText.innerHTML;
   }, 5000);
+
+/*class scoresStuff{
+  saveScore(score) {
+    const userName = this.getPlayerName();
+    let scores = [];
+    const scoresText = localStorage.getItem('scores');
+    if (scoresText) {
+      scores = JSON.parse(scoresText);
+    }
+    scores = this.updateScores(userName, score, scores);
+
+    localStorage.setItem('scores', JSON.stringify(scores));
+  }
+
+  updateScores(userName, score, scores) {
+    const date = new Date().toLocaleDateString();
+    const newScore = { name: userName, score: score, date: date };
+
+    let found = false;
+    for (const [i, prevScore] of scores.entries()) {
+      if (score > prevScore.score) {
+        scores.splice(i, 0, newScore);
+        found = true;
+        break;
+      }
+    }
+
+    if (!found) {
+      scores.push(newScore);
+    }
+
+    if (scores.length > 10) {
+      scores.length = 10;
+    }
+
+    return scores;
+  }
+}*/
+
