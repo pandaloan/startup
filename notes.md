@@ -56,8 +56,7 @@ Class Selector(“.”): The class selector selects HTML elements with a specifi
   // CSS properties
 }
 
-4. 
-CSS box model
+4. CSS box model
 
 Margin and padding are the components of the CSS box model, a design specificity related to any HTML element. These boxes of multi-layered elements are combined to form a single layout of the web page. 
 
@@ -77,11 +76,30 @@ The <span> tag is easily styled by CSS or manipulated with JavaScript using the 
 
 The <span> tag is much like the <div> element, but <div> is a block-level element and <span> is an inline element.
 
+21. switch(expression) {
+  case x:
+    // code block
+    break;
+  case y:
+    // code block
+    break;
+  default:
+    // code block
+} 
+
+if (x) {let x = y}
+
+32. A DNS A record is the most fundamental type of DNS record. The A stands for “Address,” and it’s used to point a domain name to an IP address or host. You can only use an A record when you want to point to an IPv4 address. An AAAA record is required if you wish to direct your domain to an IPv6 address. 
+
+The DNS A record points a domain name like google.com to the IP address of itsDNS hosting server, in this case, “74.125.224.147.” While most sites have a single A DNS record, it’s possible to have multiple records. 
+
+Another vital aspect of a DNS A record is that you can use it (often with a CNAME record) to create a subdomain that also points to the same IP address, for instance, blog.example.com.
+
 33. HTTPS is secure and is on port 443, while HTTP is unsecured and available on port 80. Information that travels on the port 443 is encrypted using Secure Sockets Layer (SSL) or its new version, Transport Layer Security (TLS) and hence safer. The TLS 1.2 is the latest version which has fixed several recent vulnerabilities.
 
 Using HTTPS also helps minimize a Ransomware attack by identifying open ports and then blocking access with a firewall. It is highly advisable to access and transact on sites with HTTPS to protect yourself from malicious elements as it prevents your personal information, passwords, customer data, and business-critical data from being intercepted and stolen.
 
-port 22 is for ssh
+port 22 is for ssh (secure shell protocol)
 
 
 
