@@ -72,6 +72,14 @@ For this deliverable I built out the style of my application using CSS.
 - **Application text content** - Consistent fonts.
 - **Application images** - Image in browser bar and on About page.
 
+## Javascript deliverable
+
+For this deliverable I built out the funcitonality of my application using Javascript.
+
+- **Javascript support for future login** - I made it so that clicking the login button brings the user to the Play! page.
+- **JavaScript support for future database data** - The scores page is set up to receive and display data from the database.
+- **JavaScript support for future WebSocket** - The About page will eventually use WebSocket to retrieve and display information.
+- **JavaScript support for your application's interaction logic** - The Connect4 game works and notifies the user when a player color has won.
 
 
 
