@@ -1,221 +1,114 @@
 body {
-    display: flex;
-    flex-direction: column;
-    min-width: 375px;
-    background-color: black;
-    color: blue;
-  }
-  
-  header {
-    flex: 0 80px;
-    background-color: rgb(235, 235, 83);
-    color: red;
-  }
-
-  header .navbar-brand {
-    color: red;
-  }
-
-  main {
-    background-color: black;
-    color: lightblue
-  }
-
-  #board2 {
-    height: 540px;
-    width: 630px;
-    background-color: purple;
-    border: 10px solid blue;
-    
-    margin: 0 auto;
-    display: flex;
-    flex-wrap: wrap;
+  display: flex;
+  flex-direction: column;
+  min-width: 375px;
+  background-color: black;
+  color: blue;
 }
 
-  .tile {
-    height: 70px;
-    width: 70px;
-    margin: 5px;
+header {
+  flex: 0 80px;
+  background-color: rgb(235, 235, 83);
+  color: red;
+}
 
-   /* Circle */
-    background-color: black;
-    border-radius: 50%;
-    border: 5px solid blue;
-  }
+
+main {
+  background-color: black;
+  color: lightblue
+}
+
+#board {
+  height: 540px;
+  width: 630px;
+  background-color: purple;
+  border: 10px solid blue;
+  
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.tile {
+  height: 70px;
+  width: 70px;
+  margin: 5px;
+
+ /* Circle */
+  background-color: green;
+  border-radius: 50%;
+  border: 5px solid blue;
+}
 
 .red-piece {
-  background-color: red;
+background-color: red;
 }
 
 .yellow-piece {
-  background-color: yellow;
+background-color: yellow;
 }
 
 
-  table .board {
-    margin-left: auto;
-    margin-right: auto;
-    top: 50%;
-    left: 50%;
-    transform: translateX(-50%) translateY(-50%);
-  }
+main .label {
+  color: lightblue;
+}
 
-  main .chips {
-    margin-left: auto;
-    margin-right: auto;
-  }
+li {
+  margin-left: 0px;
+  margin-right: 50px;
+  color: black;
+}
 
-  main .label {
-    color: lightblue;
-  }
 
-  li {
-    margin-left: 0px;
-    margin-right: 50px;
-    color: black;
-  }
 
-  ctable .board {
-    justify-content: space-around;
-  }
+menu {
+  flex: 1;
+  display: flex;
+  /*  overwrite Bootstrap so the menu does not wrap */
+  flex-direction: row !important;
+  list-style: none;
+  color: red;
+}
 
-  menu {
-    flex: 1;
-    display: flex;
-    /*  overwrite Bootstrap so the menu does not wrap */
-    flex-direction: row !important;
-    list-style: none;
-    color: red;
-  }
-
-  footer {
-    flex: 0 30px;
-    background: darkred;
-    color: black;
-    font-style: italic;
-  }
+footer {
+  flex: 0 30px;
+  background: darkred;
+  color: black;
+  font-style: italic;
+}
 
 
 #count {
-    /*color: rgb(246, 239, 158);*/
-    color: rgb(118, 190, 210)
-  }
-  
-  .players {
-    flex: 1;
-    width: 100%;
-    padding: 0.5em;
-    color: rgb(118, 190, 210)
-  }
-  
-  .player-name {
-    color: rgb(118, 190, 210);
-  }
-  
-  #player-messages {
-    padding-top: 0.25em;
-    opacity: 0.7;
-    color: rgb(118, 190, 210)
-  }
-  
-  .event {
-    color: rgb(69, 69, 69);
-  }
-  
-  .player-event {
-    color: rgb(165, 220, 235);
-  }
-  
-  .system-event {
-    color: rgb(221, 148, 40);
-  }
-  
-  /*.game {
-    background: rgb(0, 0, 0);
-    border-radius: 50%;
-    box-shadow: 0 0 20px 5px rgb(69, 69, 69);
-    width: 80vw;
-    height: 80vw;
-    position: absolute;
-    min-width: 350px;
-    min-height: 350px;
-    max-width: min(80vmin, 1000px);
-    max-height: min(80vmin, 1000px);
-  }
-  
-  .button-container {
-    width: 100%;
-    height: 100%;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-  }
-  
-  .button-top-left {
-    border-radius: 100% 0 0 0;
-    margin: 20px 0 0 20px;
-    background-color: green;
-    border: thick solid rgb(36, 53, 0);
-  }
-  
-  .button-top-right {
-    border-radius: 0 100% 0 0;
-    margin: 20px 20px 0 0;
-    background-color: red;
-    border: thick solid rgb(83, 12, 12);
-  }
-  
-  .button-bottom-left {
-    border-radius: 0 0 0 100%;
-    margin: 0 0 20px 20px;
-    background-color: yellow;
-    border: thick solid rgb(130, 124, 13);
-  }
-  
-  .button-bottom-right {
-    border-radius: 0 0 100% 0;
-    margin: 0 20px 20px 0;
-    background-color: blue;
-    border: thick solid rgb(27, 14, 100);
-  }
-  
-  .controls {
-    position: absolute;
-    border-radius: 50%;
-    width: 200px;
-    height: 200px;
-    background-color: black;
-    padding: 2em;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    flex-direction: column;
-  }
-  
-  .game-name {
-    font-size: 2em;
-    font-weight: bold;
-    margin-bottom: 0.5em;
-  }
-  
-  .score {
-    position: absolute;
-    text-align: center;
-    font-size: 20px;
-    font-family: monospace;
-    font-weight: bold;
-    color: red;
-    cursor: default;
-    width: 50px;
-    height: 30px;
-    border-radius: 10px;
-    border: solid thin rgb(117, 0, 0);
-    background-color: #300;
-  }
-  
-  .center {
-    top: 50%;
-    left: 50%;
-    transform: translateX(-50%) translateY(-50%);
-  }*/
-  
+  /*color: rgb(246, 239, 158);*/
+  color: rgb(118, 190, 210)
+}
+
+.players {
+  flex: 1;
+  width: 100%;
+  padding: 0.5em;
+  color: rgb(118, 190, 210)
+}
+
+.player-name {
+  color: rgb(118, 190, 210);
+}
+
+#player-messages {
+  padding-top: 0.25em;
+  opacity: 0.7;
+  color: rgb(118, 190, 210)
+}
+
+.event {
+  color: rgb(69, 69, 69);
+}
+
+.player-event {
+  color: rgb(165, 220, 235);
+}
+
+.system-event {
+  color: rgb(221, 148, 40);
+}
+

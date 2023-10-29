@@ -1,5 +1,5 @@
 
-class Game {
+/*class Game {
     buttons;
     winCondition;
 
@@ -22,7 +22,7 @@ setInterval(() => {
     const chatText = document.querySelector('#player-messages');
     chatText.innerHTML =
       `<div class="event"><span class="player-event">Eich</span> scored ${score}</div>` + chatText.innerHTML;
-  }, 5000);
+  }, 5000);*/
 
 
 
@@ -60,7 +60,7 @@ function setGame() {
             tile.id = r.toString() + "-" + c.toString(); //id="rowNumber-colNumber"
             tile.classList.add("tile"); //class called tile
             tile.addEventListener("click", setPiece);
-            document.getElementById("board2").append(tile); //append tiles to board2 in play.html
+            document.getElementById("board").append(tile); //append tiles to board2 in play.html
         }
         board.push(row); //adds row to javascript board
     }
@@ -71,7 +71,7 @@ function setPiece() {
         return;
     }
 
-    //get coords of that tile clicked
+    //get coordinatess of that tile clicked
     let coords = this.id.split("-");
     let r = parseInt(coords[0]);
     let c = parseInt(coords[1]);
@@ -159,3 +159,10 @@ function setWinner(r, c) {
     }
     gameOver = true;
 }
+
+setInterval(() => {
+    const score = Math.floor(Math.random() * 3000);
+    const chatText = document.querySelector('#player-messages');
+    chatText.innerHTML =
+      `<div class="event"><span class="player-event">Eich</span> scored ${score}</div>` + chatText.innerHTML;
+  }, 5000);
