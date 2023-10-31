@@ -694,6 +694,53 @@ There are also keystrokes that have special meaning in the console.
     CTRL-C - Kill the currently running command
 
 
+The chmod (short for change mode) command is used to manage file system access permissions on Unix and Unix-like systems. There are three basic file system permissions, or modes, to files and directories:
+    read (r)
+    write (w)
+    execute (x)
+Each mode can be applied to these classes:
+    user (u)
+    group (g)
+    other (o)
+The user is the account that owns the file. The group that owns the file may have other accounts on the system as members. The remaining class, other (sometimes referred to as world), means all other accounts on the system. You can view the modes on files and directories by executing this command: ls -l
+
+One of the primary purposes of a console application is to view the files on the computer. The files on a computer are organized into a tree structure of nodes called directories. At any given point in time your console is located at one of the directories in the file system. You can see which directory you are in with the pwd (present working directory) command.
+
+➜  pwd
+
+/Users/student/byu//webprogramming260
+
+Vim stuff:
+To use VI, open your console and change directory to one that holds some code you want to work on. For example, if you wanted to edit index.html you would type: vi index.html
+The following short list of commands should allow you to do most of what you will ever want to do in VIM.
+keystroke 	meaning
+:h 	help
+i 	enter insert mode. This will allow you to type and delete text. Use ESC to exit insert mode. No other commands will work while in insert mode.
+u 	undo
+CTRL-r 	redo
+gg 	go to beginning of file
+G 	go to end of file
+/ 	search for text that you type after /
+n 	next search match
+N 	previous search match
+v 	visually select text
+y 	yank or copy selected text to clipboard
+p 	paste clipboard
+CTRL-wv 	Split window vertically
+CTRL-ww 	Toggle windows
+CTRL-wq 	Close current window
+:e 	Open a file. Type ahead available. If you open a directory you can navigate it in the window
+:w 	write file (save)
+:q 	quit. Use :q! to exit without saving
+
+The great thing about learning these commands is that you will find that they work with a lot of the POSIX console programs. For example, with the file viewing utility less you can use G and gg to jump to the top and bottom of a file. Here is a cheat sheet if you want to see all the commands.
+
+wget - Downloading files with wget is easy. Type wget followed by the file URL you wish to download to your command prompt app, and the download should begin after you press enter.
+
+nano: Opening and Creating Files
+To open an existing file or to create a new file, type nano followed by the file name: nano filename
+
+
 32. A DNS A record is the most fundamental type of DNS record. The A stands for “Address,” and it’s used to point a domain name to an IP address or host. You can only use an A record when you want to point to an IPv4 address. An AAAA record is required if you wish to direct your domain to an IPv6 address. 
 
 The DNS A record points a domain name like google.com to the IP address of itsDNS hosting server, in this case, “74.125.224.147.” While most sites have a single A DNS record, it’s possible to have multiple records. 
