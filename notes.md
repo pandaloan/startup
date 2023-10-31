@@ -375,13 +375,108 @@ You can also add event listeners directly in the HTML. For example, here is a on
 
 <button onclick='alert("clicked")'>click me</button>
 
-12. The <span> tag is an inline container used to mark up a part of a text, or a part of a document.
+12. The span tag is an inline container used to mark up a part of a text, or a part of a document. The span tag is easily styled by CSS or manipulated with JavaScript using the class or id attribute. The span tag is much like the div element, but div is a block-level element and span is an inline element.
 
-The <span> tag is easily styled by CSS or manipulated with JavaScript using the class or id attribute.
+13. CSS:
+    div {
+  background-color: red;
+}
 
-The <span> tag is much like the <div> element, but <div> is a block-level element and <span> is an inline element.
+14. display an image with a syperlink in HTML:
+    Put the anchor tag <a href=””> before the image url, and </a> after. Paste the destination URL you want to add within the quotation marks for <a href=””>. Make sure you put “http://” before the link.
+Follow the example below:
+<a href=”https://www.google.com“> <img src=”your_image.gif” width=”100″ height=”132″> </a>
 
-21. switch(expression) {
+15. CSS box model: the ordering of the box layers starting at the inside and working out:
+    content, padding, border, margin
+
+16.
+
+17.
+
+18. How would you use JavaScript to select an element with the id of “byu” and change the text color of that element to green? see question 9
+    Javascript: getElementById(id)
+    
+  javascript example:  
+  function changeColor(newColor) {
+    const elem = document.getElementById("para");
+    elem.style.color = newColor;
+  }
+  
+
+19. Understanding the following tables:
+Common HTML tags are presented below, organized into four tables based on their purpose. The first table includes tags that control the overall structure of the web page. The second and third tables include tags that mark up the majority of web page content. Container tags (those that contain content) are presented in the second table, and non-container tags (those that stand alone) are presented in the third table. The final table contains tags that are used in markup of HTML tables, which are covered in Module 5 of this unit.
+
+Document Structure
+Opening Tag	- Closing Tag	- Description
+<html>	</html>	Opens and closes an HTML document
+<head>	</head>	The first of two main sections of an HTML document. The <head> section is used to provide information about the document for use primarily by search engines and browsers.
+<title>	</title>	The title of document. This element is nested inside the <head> section. In HTML5, this is the only required tag other than the DOCTYPE declaration.
+<body>	</body>	The second of two main sections of an HTML document. The <body> section contains all the content of the web page.
+Content (Container) Tags
+Opening Tag	Closing Tag	Description
+<h1> to <h6>	</h1>to</h6>	Headings. H1 is the main heading, H2 is secondary, etc.
+<p>	</p>	Paragraph
+<div>	</div>	A container for a block of content
+<span>	</span>	A container for in-line content, such as content inside a paragraph.
+<em>	</em>	Gives the contained text emphasis (usually as italics).
+<strong>	</strong>	Makes the contained text bold.
+<a href = "document location">	</a>	Link
+<ol>	</ol>	Ordered (numbered) list
+<ul>	</ul>	Unordered (bulleted) list
+<li>	</li>	List item, must be nested inside a list element such as a <ol> or <ul>
+<!--	-->	Comment. Anything between these tags is not displayed on the screen. This is useful for making notes to yourself or to others who may view the source code of the web page.
+  
+HTML5 Semantic Tags
+HTML5 introduced several new tags called semantic tags. These tags were designed to communicate the function of blocks of content that were common on many web pages. Prior to HTML5, developers just used <div> tags for all blocks.
+Opening Tag	- Closing Tag	- Description
+<header>	</header>	Contains introductory content for a page (e.g., a banner), or a section of a page.
+<nav>	</nav>	Contains navigation content, such as a website navigation menu.
+<main>	</main>	Contains the main content of the web page.
+<aside>	</aside>	Contains content that is tangentially related to the main content of the page (often this is presented in a sidebar).
+<footer>	</footer>	Contains the footer of a page, or of a section of a page. Typically the footer contains information about the content, such as the author and a copyright statement.
+
+Empty (Non-Container) Tags
+Tag	- Description
+<br />	Line break.
+<img src ="image location" alt="alternate text" />	Inserts an image into a web page.
+
+Tables
+Opening Tag	- Closing Tag -	Sample Attributes -	Description
+<table>	</table>	 	Adds a table
+<tr>	</tr>	 	Table row (start & end).
+<th>	</th>	scope="row"
+scope="col"	When creating a table to display data, use this tag to differentiate the first row or column of cells as heading cells for all the other cells in the same column or row. Browsers typically display this element bold and centered within the table cell. The scope attribute defines whether this is a row header or column header.
+<td>	</td>	 	Table data cell.
+ 	 	colspan="number"	Use with <th> or <td> elements. Spans cells across multiple columns.
+ 	 	rowspan="number"	Use with <th> or <td> elements. Spans cells across multiple rows.
+
+https://www.washington.edu/accesscomputing/webd2/student/unit2/common_tags.html#:~:text=An%20opening%20tag%20begins%20a,the%20element%20with%20a%20%2F).
+
+20. How do you declare the document type to be html?
+    When starting a new HTML document, one of the first things to do is write your document type declaration. A doctype declaration tells the browser that the page to be rendered is written in HTML. To declare an HTML5 doctype, `<!DOCTYPE html>` is required in the first line of your HTML document. Doctype declaration for HTML5 is not case sensitive and does not require a closing tag.
+
+21. Javascript syntax:
+if (time < 10) {
+  greeting = "Good morning";
+} else if (time < 20) {
+  greeting = "Good day";
+} else {
+  greeting = "Good evening";
+}
+
+
+for (let i = 0; i < cars.length; i++) {
+  text += cars[i] + "<br>";
+}
+
+
+while (i < 10) {
+  text += "The number is " + i;
+  i++;
+}
+
+     switch(expression) {
   case x:
     // code block
     break;
@@ -393,6 +488,16 @@ The <span> tag is much like the <div> element, but <div> is a block-level elemen
 } 
 
 if (x) {let x = y}
+
+JavaScript supports different kinds of loops:
+for - loops through a block of code a number of times
+for/in - loops through the properties of an object
+for/of - loops through the values of an iterable object
+while - loops through a block of code while a specified condition is true
+do/while - also loops through a block of code while a specified condition is true
+
+22. 
+
 
 32. A DNS A record is the most fundamental type of DNS record. The A stands for “Address,” and it’s used to point a domain name to an IP address or host. You can only use an A record when you want to point to an IPv4 address. An AAAA record is required if you wish to direct your domain to an IPv6 address. 
 
