@@ -496,7 +496,202 @@ for/of - loops through the values of an iterable object
 while - loops through a block of code while a specified condition is true
 do/while - also loops through a block of code while a specified condition is true
 
-22. 
+22. A JavaScript object represents a collection of name value pairs referred to as properties. The property name must be of type String or Symbol, but the value can be of any type. Objects also have common object-oriented functionality such as constructors, a this pointer, static properties and functions, and inheritance.
+
+Objects can be created with the new operator. This causes the object's constructor to be called. Once declared you can add properties to the object by simply referencing the property name in an assignment. Any type of variable can be assigned to a property. This includes a sub-object, array, or function. The properties of an object can be referenced either with dot (obj.prop) or bracket notation (obj['prop']).
+
+const obj = new Object({a:3});
+obj['b'] = 'fish';
+obj.c = [1, 2, 3];
+obj.hello = function () {
+  console.log('hello');
+};
+
+console.log(obj);
+// OUTPUT: {a: 3, b: 'fish', c: [1,2,3], hello: func}
+
+The ability to dynamically modify an object is incredibly useful when manipulating data with an indeterminate structure.
+
+⚠ Note the different uses of the term object. Object can refer to the standard JavaScript objects (e.g. Promise, Map, Object, Function, Date, ...), or it can refer specifically to the JavaScript Object object (i.e. new Object()), or it can refer to any JavaScript object you create (e.g. {a:'a', b:2} ). This overloaded usage can be a bit confusing.
+Object-literals
+
+You can also declare a variable of object type with the object-literal syntax. This syntax allows you to provide the initial composition of the object.
+
+const obj = {
+  a: 3,
+  b: 'fish',
+};
+
+Object functions
+
+Object has several interesting static functions associated with it. Here are some of the commonly used ones.
+Function 	Meaning
+entries 	Returns an array of key value pairs
+keys 	Returns an array of keys
+values 	Returns an array of values
+
+const obj = {
+  a: 3,
+  b: 'fish',
+};
+
+console.log(Object.entries(obj));
+// OUTPUT: [['a', 3], ['b', 'fish']]
+console.log(Object.keys(obj));
+// OUTPUT: ['a', 'b']
+console.log(Object.values(obj));
+// OUTPUT: [3, 'fish']
+
+Constructor
+
+Any function that returns an object is considered a constructor and can be invoked with the new operator.
+
+function Person(name) {
+  return {
+    name: name,
+  };
+}
+
+const p = new Person('Eich');
+console.log(p);
+// OUTPUT: {name: 'Eich'}
+
+Because objects can have any type of property value you can create methods on the object as part of its encapsulation.
+
+function Person(name) {
+  return {
+    name: name,
+    log: function () {
+      console.log('My name is ' + this.name);
+    },
+  };
+}
+
+const p = new Person('Eich');
+p.log();
+// OUTPUT: My name is Eich
+
+This pointer
+Notice in the last example the use of the keyword this when we referred to the name property (this.name). The meaning of this depends upon the scope of where it is used, but in the context of an object it refers to a pointer to the object. We will talk more about the this pointer in the instruction on scope.
+
+23. Is is possible to add new properties to javascript objects? yes.
+Properties are the values associated with a JavaScript object.
+A JavaScript object is a collection of unordered properties.
+Properties can usually be changed, added, and deleted, but some are read only.
+https://www.w3schools.com/js/js_object_properties.asp#:~:text=Properties%20are%20the%20values%20associated,but%20some%20are%20read%20only.
+Accessing JavaScript Properties:
+The syntax for accessing the property of an object is:
+
+objectName.property      // person.age
+or
+
+objectName["property"]   // person["age"]
+or
+
+objectName[expression]   // x = "age"; person[x]
+The expression must evaluate to a property name.
+
+24. If you want to include JavaScript on an HTML page, which tag do you use? The <script> Tag
+In HTML, JavaScript code is inserted between <script> and </script> tags.
+
+Example:
+<script>
+document.getElementById("demo").innerHTML = "My First JavaScript";
+</script>
+
+25.
+
+26. which of the following is true about JSON?
+
+    JavaScript Object Notation (JSON) was conceived by Douglas Crockford in 2001 while working at Yahoo! JSON, pronounced like the name Jason, received official standardization in 2013 and 2017 (ECMA-404, RFC 8259).
+
+JSON provides a simple, and yet effective way, to share and store data. By design JSON is easily convertible to, and from, JavaScript objects. This make it a very convenient data format when working with web technologies. Because of its simplicity, standardization, and compatibility with JavaScript, JSON has become one of the world's most popular data formats.
+Format
+
+A JSON document contains one of the following data types:
+Type 	Example
+string 	"crockford"
+number 	42
+boolean 	true
+array 	[null,42,"crockford"]
+object 	{"a":1,"b":"crockford"}
+null 	null
+
+Most commonly, a JSON document contains an object. Objects contain zero or more key value pairs. The key is always a string, and the value must be one of the valid JSON data types. Key value pairs are delimited with commas. Curly braces delimit an object, square brackets and commas delimit arrays, and strings are always delimited with double quotes.
+
+Here is an example of a JSON document.
+
+{
+  "class": {
+    "title": "web programming",
+    "description": "Amazing"
+  },
+  "enrollment": ["Marco", "Jana", "فَاطِمَة"],
+  "start": "2025-02-01",
+  "end": null
+}
+
+JSON is always encoded with UTF-8. This allows for the representation of global data.
+Converting to JavaScript
+
+You can convert JSON to, and from, JavaScript using the JSON.parse and JSON.stringify functions.
+
+const obj = { a: 2, b: 'crockford', c: undefined };
+const json = JSON.stringify(obj);
+const objFromJson = JSON.parse(json);
+
+console.log(obj, json, objFromJson);
+
+// OUTPUT:
+// {a: 2, b: 'crockford', c: undefined}
+// {"a":2, "b":"crockford"}
+// {a: 2, b: 'crockford'}
+
+Note that in this example, JSON cannot represent the JavaScript undefined object and so it gets dropped when converting from JavaScript to JSON.
+
+27. Console commands:
+    
+    echo - Output the parameters of the command
+    cd - Change directory
+    mkdir - Make directory
+    rmdir - Remove directory
+    rm - Remove file(s)
+    mv - Move file(s)
+    cp - Copy files
+    ls - List files
+    curl - Command line client URL browser
+    grep - Regular expression search
+    find - Find files
+    top - View running processes with CPU and memory usage
+    df - View disk statistics
+    cat - Output the contents of a file
+    less - Interactively output the contents of a file
+    wc - Count the words in a file
+    ps - View the currently running processes
+    kill - Kill a currently running process
+    sudo - Execute a command as a super user (admin)
+    ssh - Create a secure shell on a remote computer
+    scp - Securely copy files to a remote computer
+    history - Show the history of commands
+    ping - Check if a website is up
+    tracert - Trace the connections to a website
+    dig - Show the DNS information for a domain
+    man - Look up a command in the manual
+
+You can also chain the input and output of commands using special characters
+
+    | - Take the output from the command on the left and pipe, or pass, it to the command on the right
+    > - Redirect output to a file. Overwrites the file if it exists
+    >> - Redirect output to a file. Appends if the file exists
+
+For example, you can list the files in a directory, pipe it into grep to search for files created in Nov, and then pipe that into wc to count the number of files found with a date of Nov.
+
+ls -l | grep ' Nov ' | wc -l
+
+There are also keystrokes that have special meaning in the console.
+
+    CTRL-R - Use type ahead to find previous commands
+    CTRL-C - Kill the currently running command
 
 
 32. A DNS A record is the most fundamental type of DNS record. The A stands for “Address,” and it’s used to point a domain name to an IP address or host. You can only use an A record when you want to point to an IPv4 address. An AAAA record is required if you wish to direct your domain to an IPv6 address. 
