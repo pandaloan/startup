@@ -38,7 +38,11 @@ Today I learned about GitHub from my first GitHub assignment. I learned that I n
   console.log(result);
 
   # Midterm Study Guide questions and answers
-  1. The <link> HTML element specifies relationships between the current document and an external resource. This element is most commonly used to link to stylesheets, but is also used to establish site icons (both "favicon" style icons and icons for the home screen and apps on mobile devices) among other things. 
+  1. The link HTML element specifies relationships between the current document and an external resource. This element is most commonly used to link to stylesheets, but is also used to establish site icons (both "favicon" style icons and icons for the home screen and apps on mobile devices) among other things.
+     The link tag defines the relationship between the current document and an external resource. The link tag is most often used to link to external style sheets or to add a favicon to your website. The link element is an empty element, it contains attributes only.
+  
+  2. The div tag defines a division or a section in an HTML document. The div tag is used as a container for HTML elements - which is then styled with CSS or manipulated with JavaScript. The div tag is easily styled by using the class or id attribute. Any sort of content can be put inside the div tag! Note: By default, browsers always place a line break before and after the div element.
+  
   3. The dot(.) and hash(#) both of them are used as CSS selectors. Both selectors are used to select the content to set the style. CSS selectors select HTML elements according to their id, class, type, attribute, etc.
 Id selector(“#”): The id selector selects the id attribute of an HTML element to select a specific element. An id is always unique within the page so it is chosen to select a single, unique element. It is written with the hash character (#), followed by the id of the element. 
 
@@ -69,6 +73,307 @@ In general, box model usually contains four components:
 
 For better visibility, let’s look at the picture below, which gives a general presentation box model.
 https://aheadworks.com/media/Blog/shopify/Translation_6_.png
+
+5. The flex property is a shorthand property for:
+
+flex-grow
+flex-shrink
+flex-basis
+The flex property sets the flexible length on flexible items.
+
+Note: If the element is not a flexible item, the flex property has no effect.
+
+flex-grow	- A number specifying how much the item will grow relative to the rest of the flexible items	
+flex-shrink -	A number specifying how much the item will shrink relative to the rest of the flexible items	
+flex-basis - The length of the item. Legal values: "auto", "inherit", or a number followed by "%", "px", "em" or any other length unit	
+auto - Same as 1 1 auto.	
+initial -	Same as 0 1 auto. Read about initial	
+none -	Same as 0 0 auto.	
+inherit	- Inherits this property from its parent element.
+
+Example
+Using flex together with media queries to create a different layout for different screen sizes/devices:
+
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.flex-item-left {
+  flex: 50%;
+}
+
+.flex-item-right {
+  flex: 50%;
+}
+
+/* Responsive layout - makes a one column layout (100%) instead of a two-column layout (50%) */
+@media (max-width: 800px) {
+  .flex-item-right, .flex-item-left {
+    flex: 100%;
+  }
+}
+
+general flex info:
+Default value:	0 1 auto
+Inherited:	no
+Animatable:	yes, see individual properties. Read about animatable
+Version:	CSS3
+JavaScript syntax:	object.style.flex="1"
+
+6. CSS padding: Padding is used to create space around an element's content, inside of any defined borders.
+The CSS padding properties are used to generate space around an element's content, inside of any defined borders.
+
+With CSS, you have full control over the padding. There are properties for setting the padding for each side of an element (top, right, bottom, and left).
+
+Padding - Individual Sides
+CSS has properties for specifying the padding for each side of an element:
+
+padding-top
+padding-right
+padding-bottom
+padding-left
+All the padding properties can have the following values:
+
+length - specifies a padding in px, pt, cm, etc.
+% - specifies a padding in % of the width of the containing element
+inherit - specifies that the padding should be inherited from the parent element
+Note: Negative values are not allowed.
+
+7. Arrow functions were introduced in ES6.
+
+Arrow functions allow us to write shorter function syntax:
+
+let myFunction = (a, b) => a * b;
+
+Before Arrow:
+hello = function() {
+  return "Hello World!";
+}
+
+With Arrow Function:
+hello = () => {
+  return "Hello World!";
+}
+
+It gets shorter! If the function has only one statement, and the statement returns a value, you can remove the brackets and the return keyword:
+
+Arrow Functions Return Value by Default:
+hello = () => "Hello World!";
+
+Note: This works only if the function has only one statement.
+
+If you have parameters, you pass them inside the parentheses:
+
+Arrow Function With Parameters:
+hello = (val) => "Hello " + val;
+
+In fact, if you have only one parameter, you can skip the parentheses as well:
+
+Arrow Function Without Parentheses:
+hello = val => "Hello " + val;
+
+8. Multiply all the values in an array with 10:
+
+const numbers = [65, 44, 12, 4];
+const newArr = numbers.map(myFunction)
+
+function myFunction(num) {
+  return num * 10;
+}
+More examples below.
+
+Description
+map() creates a new array from calling a function for every array element.
+
+map() does not execute the function for empty elements.
+
+map() does not change the original array.
+
+See Also:
+The Array filter() Method
+
+The Array forEach() Method
+
+Syntax
+array.map(function(currentValue, index, arr), thisValue)
+Parameters:
+Parameter and	Description:
+function() -	Required. A function to be run for each array element.
+currentValue -	Required. The value of the current element.
+index -	Optional. The index of the current element.
+arr	 -Optional. The array of the current element.
+thisValue	- Optional. Default value undefined.
+A value passed to the function to be used as its this value.
+Return Value:
+Type	and Description:
+An array -	The results of a function for each array element.
+
+9. HTML DOM Document getElementById()
+Example: Get the element with the specified id: document.getElementById("demo");
+
+The getElementById() method returns an element with a specified value. The getElementById() method returns null if the element does not exist. The getElementById() method is one of the most common methods in the HTML DOM. It is used almost every time you want to read or edit an HTML element. Note: Any id should be unique, but: If two or more elements with the same id exist, getElementById() returns the first.
+See Also:
+The getElementsByTagName() Method
+The getElementsByClassName() Method
+The querySelector() Method
+The querySelectorAll() Method
+
+JavaScript HTML DOM EventListener:
+The addEventListener() method
+Example: Add an event listener that fires when a user clicks a button: document.getElementById("myBtn").addEventListener("click", displayDate);
+The addEventListener() method attaches an event handler to the specified element.
+The addEventListener() method attaches an event handler to an element without overwriting existing event handlers.
+You can add many event handlers to one element.
+You can add many event handlers of the same type to one element, i.e two "click" events.
+You can add event listeners to any DOM object not only HTML elements. i.e the window object.
+The addEventListener() method makes it easier to control how the event reacts to bubbling.
+When using the addEventListener() method, the JavaScript is separated from the HTML markup, for better readability and allows you to add event listeners even when you do not control the HTML markup.
+You can easily remove an event listener by using the removeEventListener() method.
+Syntax:velement.addEventListener(event, function, useCapture);
+The first parameter is the type of the event (like "click" or "mousedown" or any other HTML DOM Event.)
+The second parameter is the function we want to call when the event occurs.
+The third parameter is a boolean value specifying whether to use event bubbling or event capturing. This parameter is optional.
+
+Note that you don't use the "on" prefix for the event; use "click" instead of "onclick".
+
+Add an Event Handler to an Element
+Example: Alert "Hello World!" when the user clicks on an element: element.addEventListener("click", function(){ alert("Hello World!"); });
+You can also refer to an external "named" function: Example: Alert "Hello World!" when the user clicks on an element: element.addEventListener("click", myFunction);
+function myFunction() {
+  alert ("Hello World!");
+}
+
+10. The Document method querySelector() returns the first Element within the document that matches the specified selector, or group of selectors. If no matches are found, null is returned.
+example:
+HTML
+<div id="foo\bar"></div>
+<div id="foo:bar"></div>
+
+<script>
+  console.log("#foo\bar"); // "#fooar" (\b is the backspace control character)
+  document.querySelector("#foo\bar"); // Does not match anything
+
+  console.log("#foo\\bar"); // "#foo\bar"
+  console.log("#foo\\\\bar"); // "#foo\\bar"
+  document.querySelector("#foo\\\\bar"); // Match the first div
+
+  document.querySelector("#foo:bar"); // Does not match anything
+  document.querySelector("#foo\\:bar"); // Match the second div
+</script>
+
+javascript example:
+in this example, the first element in the document with the class "myclass" is returned:
+JS
+const el = document.querySelector(".myclass");
+
+Complex selectors
+Selectors can also be really powerful, as demonstrated in the following example. Here, the first <input> element with the name "login" (<input name="login"/>) located inside a <div> whose class is "user-panel main" (<div class="user-panel main">) in the document is returned:
+
+JS
+const el = document.querySelector("div.user-panel.main input[name='login']");
+Negation
+As all CSS selector strings are valid, you can also negate selectors:
+
+JS
+const el = document.querySelector(
+  "div.user-panel:not(.main) input[name='login']",
+);
+
+11. The Document Object Model (DOM) is the data representation of the objects that comprise the structure and content of a document on the web.
+
+The Document Object Model (DOM) is an object representation of the HTML elements that the browser uses to render the display. The browser also exposes the DOM to external code so that you can write programs that dynamically manipulate the HTML.
+
+The browser provides access to the DOM through a global variable name document that points to the root element of the DOM. If you open the browser's debugger console window and type the variable name document you will see the DOM for the document the browser is currently rendering.
+
+> document
+<html lang="en">
+  <body>
+    <p>text1 <span>text2</span></p>
+    <p>text3</p>
+  </body>
+</html>
+p {
+  color: red;
+}
+
+For everything in an HTML document there is a node in the DOM. This includes elements, attributes, text, comments, and whitespace. All of these nodes form a big tree, with the document node at the top.
+
+Accessing the DOM
+
+Every element in an HTML document implements the DOM Element interface, which is derived from the DOM Node interface. The DOM Element Interface provides the means for iterating child elements, accessing the parent element, and manipulating the element's attributes. From your JavaScript code, you can start with the document variable and walk through the every element in the tree.
+
+function displayElement(el) {
+  console.log(el.tagName);
+  for (const child of el.children) {
+    displayElement(child);
+  }
+}
+
+displayElement(document);
+
+You can provide a CSS selector to the querySelectorAll function in order to select elements from the document. The textContent property contains all of the element's text. You can even access a textual representation of an element's HTML content with the innerHTML property.
+
+const listElements = document.querySelectorAll('p');
+for (const el of listElements) {
+  console.log(el.textContent);
+}
+
+Modifying the DOM
+
+The DOM supports the ability to insert, modify, or delete the elements in the DOM. To create a new element you first create the element on the DOM document. You then insert the new element into the DOM tree by appending it to an existing element in the tree.
+
+function insertChild(parentSelector, text) {
+  const newChild = document.createElement('div');
+  newChild.textContent = text;
+
+  const parentElement = document.querySelector(parentSelector);
+  parentElement.appendChild(newChild);
+}
+
+insertChild('#courses', 'new course');
+
+To delete elements call the removeChild function on the parent element.
+
+function deleteElement(elementSelector) {
+  const el = document.querySelector(elementSelector);
+  el.parentElement.removeChild(el);
+}
+
+deleteElement('#courses div');
+
+Injecting HTML
+
+The DOM also allows you to inject entire blocks of HTML into an element. The following code finds the first div element in the DOM and replaces all the HTML it contains.
+
+const el = document.querySelector('div');
+el.innerHTML = '<div class="injected"><b>Hello</b>!</div>';
+
+However, directly injecting HTML as a block of text is a common attack vector for hackers. If an untrusted party can inject JavaScript anywhere in your application then that JavaScript can represent itself as the current user of the application. The attacker can then make requests for sensitive data, monitor activity, and steal credentials. The example below shows how the img element can be used to launch an attack as soon as the page is loaded.
+
+<img src="bogus.png" onerror="console.log('All your base are belong to us')" />
+
+If you are injecting HTML, make sure that it cannot be manipulated by a user. Common injection paths include HTML input controls, URL parameters, and HTTP headers. Either sanitize any HTML that contains variables, or simply use DOM manipulation functions instead of using innerHTML.
+Event Listeners
+
+All DOM elements support the ability to attach a function that gets called when an event occurs on the element. These functions are called event listeners. Here is an example of an event listener that gets called when an element gets clicked.
+
+const submitDataEl = document.querySelector('#submitData');
+submitDataEl.addEventListener('click', function (event) {
+  console.log(event.type);
+});
+
+There are lots of possible events that you can add a listener to. This includes things like mouse, keyboard, scrolling, animation, video, audio, WebSocket, and clipboard events. You can see the full list on MDN. Here are a few of the more commonly used events.
+Event Category 	Description
+Clipboard 	Cut, copied, pasted
+Focus 	An element gets focus
+Keyboard 	Keys are pressed
+Mouse 	Click events
+Text selection 	When text is selected
+
+You can also add event listeners directly in the HTML. For example, here is a onclick handler that is attached to a button.
+
+<button onclick='alert("clicked")'>click me</button>
 
 12. The <span> tag is an inline container used to mark up a part of a text, or a part of a document.
 
