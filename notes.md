@@ -734,11 +734,31 @@ CTRL-wq 	Close current window
 :q 	quit. Use :q! to exit without saving
 
 The great thing about learning these commands is that you will find that they work with a lot of the POSIX console programs. For example, with the file viewing utility less you can use G and gg to jump to the top and bottom of a file. Here is a cheat sheet if you want to see all the commands.
+how to close vim: press esc to enter normal mode, then press ":q!"
 
 wget - Downloading files with wget is easy. Type wget followed by the file URL you wish to download to your command prompt app, and the download should begin after you press enter.
 
 nano: Opening and Creating Files
 To open an existing file or to create a new file, type nano followed by the file name: nano filename
+close nano: ctrl + x
+
+28. console command creates a remote shell session? ssh? rsh?
+    To shell into production environment server: ssh -i ~/Documents/'CS 260'/'First Key Pair.pem' ubuntu@52.206.31.215
+
+29. console command ls -la: You can list all of the files in the directory with ls (list files). Most command line applications take parameters that are specified after you type the application name. For example, ls can list all files (even hidden ones) in a long format if you provide the parameter -la.
+total 16
+-rw-r--r--  1 lee  staff   1.0K Nov 19 08:47 LICENSE
+-rw-r--r--  1 lee  staff    82B Nov 19 08:47 README.md
+drwxr-xr-x  4 lee  staff   128B Nov 19 08:48 profile
+drwxr-xr-x  4 lee  staff   128B Nov 19 08:47 react
+
+30. top level domain: .com, .click
+    [subdomain.]*secondary.top
+    root = secondary.top
+    there can be an unlimited amount of subdomains, or at least more than one, as far as I understand.
+
+31. Is a web certificate is necessary to use HTTPS? To use HTTPS with your domain name, you need a SSL or TLS certificate installed on your website. Your web host (Web Hosting Provider) may offer HTTPS security or you can request a SSL/TLS certificate from Certificate Authorities and install it yourself. SSL/TLS certificates may need to be renewed periodically.
+    so, yes, i think you need a web certificate to use https
 
 
 32. A DNS A record is the most fundamental type of DNS record. The A stands for “Address,” and it’s used to point a domain name to an IP address or host. You can only use an A record when you want to point to an IPv4 address. An AAAA record is required if you wish to direct your domain to an IPv6 address. 
@@ -752,6 +772,296 @@ Another vital aspect of a DNS A record is that you can use it (often with a CNAM
 Using HTTPS also helps minimize a Ransomware attack by identifying open ports and then blocking access with a firewall. It is highly advisable to access and transact on sites with HTTPS to protect yourself from malicious elements as it prevents your personal information, passwords, customer data, and business-critical data from being intercepted and stolen.
 
 port 22 is for ssh (secure shell protocol)
+
+34. javascript promises:
+    Promises
+
+📖 Deeper dive reading:
+
+    MDN Using Promises
+    MDN Promise
+
+JavaScript executes as a single threaded application. That means there is only ever one piece of code executing at the same time. However, the fact that it does not execute concurrently does not mean that it does not execute in parallel. You can asynchronously execute code with the use of a JavaScript Promise. Because the execution is asynchronous the promise object can be in one of three states at any given point in time.
+
+    pending - Currently running asynchronously
+    fulfilled - Completed successfully
+    rejected - Failed to complete
+
+You create a promise by calling the Promise object constructor and passing it an executor function that runs the asynchronous operation. Executing asynchronously means that promise constructor may return before the promise executor function runs.
+
+We can demonstrate asynchronous execution by using the standard JavaScript setTimeout function to create a delay in the execution of the code. The setTimeout function takes the number of milliseconds to wait and a function to call after that amount of time has expired. We call the delay function in a for loop in the promise executor and also a for loop outside the promise so that both code blocks are running in parallel.
+
+const delay = (msg, wait) => {
+  setTimeout(() => {
+    console.log(msg, wait);
+  }, 1000 * wait);
+};
+
+new Promise((resolve, reject) => {
+  // Code executing in the promise
+  for (let i = 0; i < 3; i++) {
+    delay('In promise', i);
+  }
+});
+
+// Code executing after the promise
+for (let i = 0; i < 3; i++) {
+  delay('After promise', i);
+}
+
+// OUTPUT:
+//   In promise 0
+//   After promise 0
+//   In promise 1
+//   After promise 1
+//   In promise 2
+//   After promise 2
+
+Resolving and rejecting
+
+Now that we know how to use a promise to execute asynchronously, we need to be able to set the state to fulfilled when things complete correctly, or to rejected when an error happens. The promise executor function takes two functions as parameters, resolve and reject. Calling resolve sets the promise to the fulfilled state, and calling reject sets the promise to the rejected state.
+
+Consider the following "coin toss" promise that waits ten seconds and then has a fifty percent chance of resolving or rejecting.
+
+const coinToss = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    if (Math.random() > 0.5) {
+      resolve('success');
+    } else {
+      reject('error');
+    }
+  }, 10000);
+});
+
+If you log the coinToss promise object to the console immediately after calling the constructor, it will display that it is in the pending state.
+
+console.log(coinToss);
+// OUTPUT: Promise {<pending>}
+
+If you then wait ten seconds and the log the coinToss promise object again, the state will either show as fulfilled or rejected depending upon the way the coin landed.
+
+console.log(coinToss);
+// OUTPUT: Promise {<fulfilled>}
+
+Then, catch, finally
+
+With the ability to asynchronously execute and set the resulting state, we now need a way to generically do something with the result of a promise after it resolves. This is done with functionality similar to exception handling. The promise object has three functions: then, catch, and finally. The then function is called if the promise is fulfilled, catch is called if the promise is rejected, and finally is always called after all the processing is completed.
+
+We can rework our coinToss example and make it so 10 percent of the time the coin falls off the table and resolves to the rejected state. Otherwise the promise resolves to fulfilled with a result of either heads or tails.
+
+const coinToss = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    if (Math.random() > 0.1) {
+      resolve(Math.random() > 0.5 ? 'heads' : 'tails');
+    } else {
+      reject('fell off table');
+    }
+  }, 10000);
+});
+
+We then chain the then, catch and finally functions to the coinToss object in order to handle each of the possible results.
+
+coinToss
+  .then((result) => console.log(`Coin toss result: ${result}`))
+  .catch((err) => console.log(`Error: ${err}`))
+  .finally(() => console.log('Toss completed'));
+
+// OUTPUT:
+//    Coin toss result: tails
+//    Toss completed
+
+The observer pattern
+Promises are the standard way to do asynchronous processing in JavaScript, but they are not the only way. The Observer pattern, popularized by web programming frameworks such as Angular, use a model called Observer. The major difference between Observers and Promises is that Promises immediately begin to execute when the Promise is created, but Observers form a pipeline that you then pass an execution object into. This allows Observers to be reused, and the result of executing an Observable to be saved as a history of a particular execution.
+
+Example pizza promise:
+function pickupPizza() {
+  const order = createOrder();
+
+  // Promise
+  placeOrder(order)
+    .then((order) => makePizza(order))
+    .then((order) => serveOrder(order))
+    .catch((order) => {
+      orderFailure(order);
+    });
+}
+
+function createOrder() {
+  // Make the order and associate it with a new HTML element
+  const id = Math.floor(Math.random() * 10000);
+  const orderElement = document.createElement("li");
+  const order = { element: orderElement, id: id };
+
+  // Insert the order into the HTML list
+  orderElement.innerHTML = `<span>[${order.id}] &#128523; <i>Waiting</i> ...</span>`;
+  const orders = document.getElementById("orders");
+  orders.appendChild(orderElement);
+
+  return order;
+}
+
+function placeOrder(order) {
+  return new Promise((resolve, reject) => {
+    doWork(order, 1000, 3000, resolve, reject, `cashier too busy`);
+  });
+}
+
+function makePizza(order) {
+  return new Promise((resolve, reject) => {
+    doWork(order, 1000, 3000, resolve, reject, `pizza eaten by raccoon`);
+  });
+}
+
+function doWork(order, min, max, resolve, reject, errMsg) {
+  let workTime = Math.random() * (max - min) + min;
+  setTimeout(() => {
+    workTime = Math.round(workTime);
+    if (workTime < max * 0.85) {
+      resolve(order);
+    } else {
+      order.error = errMsg;
+      reject(order);
+    }
+  }, workTime);
+}
+
+function serveOrder(order) {
+  order.element.innerHTML = `<span>[${order.id}] &#127829; <b>Served</b>!</span>`;
+}
+
+function orderFailure(order) {
+  order.element.innerHTML = `<span> [${order.id}] &#128544; <b class='failure'>Failure</b>! ${order.error}</span>`;
+}
+
+original pizza:
+/ Promise
+  placeOrder(order)
+    .then((order) => serveOrder(order))
+    .catch((order) => {
+      orderFailure(order);
+    });
+
+
+async/await pizza:
+/*function pickupPizza() {
+  const order = createOrder();
+
+  // Promise
+  placeOrder(order)
+    .then((order) => serveOrder(order))
+    .catch((order) => {
+      orderFailure(order);
+    });
+}*/
+
+//async/await version of pickupPizza)()
+async function pickupPizza() {
+  const order = createOrder();
+  try {
+    await placeOrder(order);
+    //await makePizza(order)
+    serveOrder(order);
+  } catch (order) {
+    orderfailure(order);
+  }
+}
+
+function createOrder() {
+  // Make the order and associate it with a new HTML element
+  const id = Math.floor(Math.random() * 10000);
+  const orderElement = document.createElement("li");
+  const order = { element: orderElement, id: id };
+
+  // Insert the order into the HTML list
+  orderElement.innerHTML = `<span>[${order.id}] &#128523; <i>Waiting</i> ...</span>`;
+  const orders = document.getElementById("orders");
+  orders.appendChild(orderElement);
+
+  return order;
+}
+
+function placeOrder(order) {
+  return new Promise((resolve, reject) => {
+    doWork(order, 1000, 3000, resolve, reject, `cashier too busy`);
+  });
+}
+
+function doWork(order, min, max, resolve, reject, errMsg) {
+  let workTime = Math.random() * (max - min) + min;
+  setTimeout(() => {
+    workTime = Math.round(workTime);
+    if (workTime < max * 0.85) {
+      resolve(order);
+    } else {
+      order.error = errMsg;
+      reject(order);
+    }
+  }, workTime);
+}
+
+function serveOrder(order) {
+  order.element.innerHTML = `<span>[${order.id}] &#127829; <b>Served</b>!</span>`;
+}
+
+function orderFailure(order) {
+  order.element.innerHTML = `<span> [${order.id}] &#128544; <b class='failure'>Failure</b>! ${order.error}</span>`;
+}
+
+async/await original pizza:
+
+function pickupPizza() {
+  const order = createOrder();
+
+  // Promise
+  placeOrder(order)
+    .then((order) => serveOrder(order))
+    .catch((order) => {
+      orderFailure(order);
+    });
+}
+
+function createOrder() {
+  // Make the order and associate it with a new HTML element
+  const id = Math.floor(Math.random() * 10000);
+  const orderElement = document.createElement("li");
+  const order = { element: orderElement, id: id };
+
+  // Insert the order into the HTML list
+  orderElement.innerHTML = `<span>[${order.id}] &#128523; <i>Waiting</i> ...</span>`;
+  const orders = document.getElementById("orders");
+  orders.appendChild(orderElement);
+
+  return order;
+}
+
+function placeOrder(order) {
+  return new Promise((resolve, reject) => {
+    doWork(order, 1000, 3000, resolve, reject, `cashier too busy`);
+  });
+}
+
+function doWork(order, min, max, resolve, reject, errMsg) {
+  let workTime = Math.random() * (max - min) + min;
+  setTimeout(() => {
+    workTime = Math.round(workTime);
+    if (workTime < max * 0.85) {
+      resolve(order);
+    } else {
+      order.error = errMsg;
+      reject(order);
+    }
+  }, workTime);
+}
+
+function serveOrder(order) {
+  order.element.innerHTML = `<span>[${order.id}] &#127829; <b>Served</b>!</span>`;
+}
+
+function orderFailure(order) {
+  order.element.innerHTML = `<span> [${order.id}] &#128544; <b class='failure'>Failure</b>! ${order.error}</span>`;
+}
+
+
 
 
 
