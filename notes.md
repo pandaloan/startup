@@ -1061,6 +1061,11 @@ function orderFailure(order) {
   order.element.innerHTML = `<span> [${order.id}] &#128544; <b class='failure'>Failure</b>! ${order.error}</span>`;
 }
 
+# Final
+# 11-4-23
+- URL: <scheme>://<domain name>:<port>/<path>?<parameters>#<anchor>
+
+
 
 
 
