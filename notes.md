@@ -1091,6 +1091,15 @@ Port 	Protocol
 
 Use port 4000 for your startup service. Simon uses port 3000 for its service, and they can't use the same port.
 
+- HTTP:
+There are several verbs that describe what the HTTP request is asking for. The list below only describes the most common ones.
+Verb 	Meaning
+GET 	Get the requested resource. This can represent a request to get a single resource or a resource representing a list of resources.
+POST 	Create a new resource. The body of the request contains the resource. The response should include a unique ID of the newly created resource.
+PUT 	Update a resource. Either the URL path, HTTP header, or body must contain the unique ID of the resource being updated. The body of the request should contain the updated resource. The body of the response may contain the resulting updated resource.
+DELETE 	Delete a resource. Either the URL path or HTTP header must contain the unique ID of the resource to delete.
+OPTIONS 	Get metadata about a resource. Usually only HTTP headers are returned. The resource itself is not returned.
+
 
 
 
