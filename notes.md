@@ -1076,7 +1076,18 @@ Technically you can also provide a user name and password before the domain name
 URL, URN, and URI
 You will sometimes hear the use of URN or URI when talking about web resources. A Uniform Resource Name (URN) is a unique resource name that does not specify location information. For example, a book URN might be urn:isbn:10,0765350386. A Uniform Resource Identifier (URI) is a general resource identifier that could refer to either a URL or a URN. With web programming you are almost always talking about URLs and therefore you should not use the more general URI.
 
-
+- Ports:
+Port 	Protocol
+20 	File Transfer Protocol (FTP) for data transfer
+22 	Secure Shell (SSH) for connecting to remote devices
+25 	Simple Mail Transfer Protocol (SMTP) for sending email
+53 	Domain Name System (DNS) for looking up IP addresses
+80 	Hypertext Transfer Protocol (HTTP) for web requests
+110 	Post Office Protocol (POP3) for retrieving email
+123 	Network Time Protocol (NTP) for managing time
+161 	Simple Network Management Protocol (SNMP) for managing network devices such as routers or printers
+194 	Internet Relay Chat (IRC) for chatting
+443 	HTTP Secure (HTTPS) for secure web requests
 
 
 
