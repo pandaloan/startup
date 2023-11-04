@@ -1089,7 +1089,7 @@ Port 	Protocol
 194 	Internet Relay Chat (IRC) for chatting
 443 	HTTP Secure (HTTPS) for secure web requests
 
-
+Use port 4000 for your startup service. Simon uses port 3000 for its service, and they can't use the same port.
 
 
 
