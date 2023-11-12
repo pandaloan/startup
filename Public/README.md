@@ -81,5 +81,16 @@ For this deliverable I built out the funcitonality of my application using Javas
 - **JavaScript support for future WebSocket** - The About page will eventually use WebSocket to retrieve and display information.
 - **JavaScript support for your application's interaction logic** - The Connect4 game works and notifies the user when a player color has won.
 
+## Service deliverable
+
+For this deliverable I added backend endpoints that stores and displayes username.
+
+    Node.js/Express HTTP service - done!
+    Static middleware for frontend - done!
+    Calls to third party endpoints - done!
+    Backend service endpoints - Placeholders for login that stores the current user on the server.
+    Frontend calls service endpoints - I did this using the fetch function.
+
+
 
 
