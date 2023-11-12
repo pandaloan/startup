@@ -50,9 +50,7 @@ window.onload = function() {
     setGame();
 }
 
-function getPlayerName() {
-    return localStorage.getItem('userName') ?? 'Mystery player';
-  }
+
 
 function setGame() {
     board = []; //board starts out empty
@@ -169,6 +167,10 @@ function setWinner(r, c) {
         //gameOver = true;
         //const score = "yellow wins"
     }
+    score = winner.innerText
+    updateScore(score)
+    saveScore(score)
+    updateScoresLocal(score)
     gameOver = true;
     //saveScore(score); //check this stuff
     //updateScores(username, score, scores); //check this stuff
@@ -182,8 +184,11 @@ setInterval(() => {
       `<div class="event"><span class="player-event">Ahsoka</span> scored ${score}</div>` + chatText.innerHTML;
   }, 5000);
 
-class scoresStuff{
-  saveScore(score) {
+function getPlayerName() {
+    return localStorage.getItem('userName') ?? 'Mystery player';
+}
+
+  /*saveScore(score) {
     const userName = this.getPlayerName();
     let scores = [];
     const scoresText = localStorage.getItem('scores');
@@ -217,6 +222,60 @@ class scoresStuff{
     }
 
     return scores;
+  }*/
+
+
+function updateScore(score) {
+    const scoreEl = document.querySelector('#score');
+    scoreEl.textContent = score;
   }
-}
+
+async function saveScore(score) {
+    const userName = this.getPlayerName();
+    const date = new Date().toLocaleDateString();
+    const newScore = {name: userName, score: score, date: date};
+
+    try {
+      const response = await fetch('/api/score', {
+        method: 'POST',
+        headers: {'content-type': 'application/json'},
+        body: JSON.stringify(newScore),
+      });
+
+      // Store what the service gave us as the high scores
+      const scores = await response.json();
+      localStorage.setItem('scores', JSON.stringify(scores));
+    } catch {
+      // If there was an error then just track scores locally
+      this.updateScoresLocal(newScore);
+    }
+  }
+
+  function updateScoresLocal(newScore) {
+    let scores = [];
+    const scoresText = localStorage.getItem('scores');
+    if (scoresText) {
+      scores = JSON.parse(scoresText);
+    }
+
+    let found = false;
+    for (const [i, prevScore] of scores.entries()) {
+      if (newScore > prevScore.score) {
+        scores.splice(i, 0, newScore);
+        found = true;
+        break;
+      }
+    }
+
+    if (!found) {
+      scores.push(newScore);
+    }
+
+    if (scores.length > 10) {
+      scores.length = 10;
+    }
+
+    localStorage.setItem('scores', JSON.stringify(scores));
+  }
+
 
