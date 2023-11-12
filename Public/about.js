@@ -54,8 +54,8 @@ function displayPicture() {
   }
   
   displayPicture();
-  //displayQuote();
-  displaySong();
+  displayQuote();
+  //displaySong();
 
 /**
  * Generates a link to a Nirvana song on Spotify.
