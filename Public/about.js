@@ -33,7 +33,42 @@ function displayPicture() {
         containerEl.appendChild(authorEl);
       });
   }
+
+  function displaySong(data) {
+    fetch('http://swquotesapi.digitaljedi.dk/api/SWQuote/RandomStarWarsQuote')
+      .then((response) => response.json())
+      .then((data) => {
+        const containerEl = document.querySelector('#quote');
+  
+        const quoteEl = document.createElement('p');
+        quoteEl.classList.add('quote');
+        const authorEl = document.createElement('p');
+        authorEl.classList.add('author');
+  
+        quoteEl.textContent = data.content;
+        authorEl.textContent = data.author;
+  
+        containerEl.appendChild(quoteEl);
+        containerEl.appendChild(authorEl);
+      });
+  }
   
   displayPicture();
-  displayQuote();
+  //displayQuote();
+  displaySong();
+
+/**
+ * Generates a link to a Nirvana song on Spotify.
+ *
+ * @returns {string} The Spotify link to a Nirvana song.
+ */
+function generateNirvanaSongLink() {
+    // Replace 'SONG_ID' with the actual ID of the Nirvana song on Spotify
+    const songId = 'SONG_ID';
+    return `https://open.spotify.com/track/${songId}`;
+}
+ 
+// Usage Example
+const nirvanaSongLink = generateNirvanaSongLink();
+//console.log(`Here is a link to a Nirvana song on Spotify: ${nirvanaSongLink}`);
   
