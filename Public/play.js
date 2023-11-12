@@ -50,6 +50,10 @@ window.onload = function() {
     setGame();
 }
 
+function getPlayerName() {
+    return localStorage.getItem('userName') ?? 'Mystery player';
+  }
+
 function setGame() {
     board = []; //board starts out empty
     currColumns = [5, 5, 5, 5, 5, 5, 5];

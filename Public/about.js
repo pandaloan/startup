@@ -53,7 +53,7 @@ function displayPicture() {
       });
   }
   
-  displayPicture();
+  //displayPicture();
   displayQuote();
   //displaySong();
 
