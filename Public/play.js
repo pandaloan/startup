@@ -184,6 +184,9 @@ setInterval(() => {
       `<div class="event"><span class="player-event">Ahsoka</span> scored ${score}</div>` + chatText.innerHTML;
   }, 5000);
 
+const playerNameEl = document.querySelector('.player-name');
+playerNameEl.textContent = this.getPlayerName();
+
 function getPlayerName() {
     return localStorage.getItem('userName') ?? 'Mystery player';
 }
