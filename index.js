@@ -1,4 +1,4 @@
-/*
+
 //express only, no database or mongodb involved in this section
 const express = require('express');
 const app = express();
@@ -34,14 +34,14 @@ app.use((_req, res) => {
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
-});*/
+});
 
 
 
 
 
 
-
+/*
 //this section does stuff with mongodb
 
 const express = require('express');
@@ -111,3 +111,4 @@ app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
 
+*/

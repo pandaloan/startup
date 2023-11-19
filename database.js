@@ -36,4 +36,4 @@ function getHighScores() {
   return cursor.toArray();
 }
 
-module.exports = { addScore, getScores }; // module.exports = { addScore }; 
+module.exports = { addScore, getHighScores }; // module.exports = { addScore }; 
