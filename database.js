@@ -22,7 +22,7 @@ async function addScore(score) {
 
 function getHighScores() {
     //const query = { score: { $gt: 0, $lt: 900 } }; // ??
-  const query = { score: {$e: "Red Wins", $e: "Yellow Wins"} };
+  const query = { score: {$lt: "Red Wins", $gt: "Yellow Wins"} };
   const options = {
     sort: { score: -1 },
     limit: 10,
