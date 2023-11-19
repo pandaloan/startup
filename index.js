@@ -1,4 +1,6 @@
-/*const express = require('express');
+/*
+//express only, no database or mongodb involved in this section
+const express = require('express');
 const app = express();
 
 // The service port. In production the frontend code is statically hosted by the service on the same port.
@@ -34,9 +36,45 @@ app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });*/
 
+
+
+
+
+
+
+//this section does stuff with mongodb
+
 const express = require('express');
 const app = express();
+//const { MongoClient } = require('mongodb');
+//const config = require('./dbConfig.json');
+//const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
+//const client = new MongoClient(url);
+
+const { MongoClient } = require('mongodb');
+const config = require('./dbConfig.json');
+
 const DB = require('./database.js');
+
+async function main() {
+  // Connect to the database cluster
+  const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
+  const client = new MongoClient(url);
+  const db = client.db('rental');
+  const collection = db.collection('house');
+
+  // Test that you can connect to the database
+  (async function testConnection() {
+    await client.connect();
+    await db.command({ ping: 1 });
+  })().catch((ex) => {
+    console.log(`Unable to connect to database with ${url} because ${ex.message}`);
+    process.exit(1);
+  });
+}
+
+main().catch(console.error);
+
 
 // The service port. In production the application is statically hosted by the service on the same port.
 const port = process.argv.length > 2 ? process.argv[2] : 3000;
