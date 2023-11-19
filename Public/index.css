@@ -6,12 +6,12 @@ body {
   
   header {
     flex: 0 80px;
-    background-color: rgb(235, 235, 83);
-    color: red;
+    background-color: red;
+    color: rgb(235, 235, 83);
   }
 
   header .navbar-brand {
-    color: red;
+    color: rgb(235, 235, 83);
   }
   
   main {
@@ -80,7 +80,7 @@ body {
   
   footer {
     flex: 0 30px;
-    background: darkred;
+    background: rgb(235, 235, 83);
     color: black;
     font-style: italic;
   }

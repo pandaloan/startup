@@ -8,23 +8,23 @@ body {
 
 header {
   flex: 0 80px;
-  background-color: rgb(235, 235, 83);
-  color: red;
+  background-color: red;
+  color: rgb(235, 235, 83);
 }
 
 header .nav {
-  color: red;
+  color: rgb(235, 235, 83);
 }
 
 menu .nav-item {
-  color: red;
+  color: rgb(235, 235, 83);
 }
 
 header .navbar-brand {
-  color: red;
+  color: rgb(235, 235, 83);
 }
 menu .navbar-nav {
-  color: red;
+  color: rgb(235, 235, 83);
 }
 
 main {
@@ -43,7 +43,7 @@ menu {
   /*  overwrite Bootstrap so the menu does not wrap */
   flex-direction: row !important;
   list-style: none;
-  color: red;
+  color: rgb(235, 235, 83);
 }
 
 li {
@@ -91,7 +91,7 @@ main .quote {
 
 footer {
   flex: 0 30px;
-  background: darkred;
+  background: rgb(235, 235, 83);
   color: black;
   font-style: italic;
 }
