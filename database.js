@@ -21,7 +21,8 @@ async function addScore(score) {
 }
 
 function getHighScores() {
-  const query = { score: { $gt: 0, $lt: 900 } };
+    //const query = { score: { $gt: 0, $lt: 900 } }; // ??
+  const query = { score: {$e: "Red Wins", $e: "Yellow Wins"} };
   const options = {
     sort: { score: -1 },
     limit: 10,
@@ -30,4 +31,4 @@ function getHighScores() {
   return cursor.toArray();
 }
 
-module.exports = { addScore, getHighScores };
+module.exports = { addScore, getHighScores }; // module.exports = { addScore }; 
