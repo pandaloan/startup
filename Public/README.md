@@ -91,6 +91,15 @@ For this deliverable I added backend endpoints that store and display username a
  - **Backend service endpoints** - Placeholders for login that stores the current user on the server.
  - **Frontend calls service endpoints** - I did this using the fetch function.
 
+## DB deliverable
+
+For this deliverable I stored the scores in the database.
+
+    MongoDB Atlas database created - done!
+    Endpoints for data - attempted
+    Stores data in MongoDB - attempted - 502 error
+
+
 
 
 
