@@ -20,6 +20,11 @@ async function addScore(score) {
   return result;
 }
 
+function getScores() {
+    const cursor = scoreCollection;
+    return cursor.toArray();
+}
+
 function getHighScores() {
     //const query = { score: { $gt: 0, $lt: 900 } }; // ??
   const query = { score: {$lt: 0, $gt: 900} };
@@ -31,4 +36,4 @@ function getHighScores() {
   return cursor.toArray();
 }
 
-module.exports = { addScore, getHighScores }; // module.exports = { addScore }; 
+module.exports = { addScore, getScores }; // module.exports = { addScore }; 

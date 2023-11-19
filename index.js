@@ -1,4 +1,4 @@
-const express = require('express');
+/*const express = require('express');
 const app = express();
 
 // The service port. In production the frontend code is statically hosted by the service on the same port.
@@ -32,9 +32,9 @@ app.use((_req, res) => {
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
-});
+});*/
 
-/*const express = require('express');
+const express = require('express');
 const app = express();
 const DB = require('./database.js');
 
@@ -53,14 +53,14 @@ app.use(`/api`, apiRouter);
 
 // GetScores
 apiRouter.get('/scores', async (_req, res) => {
-  const scores = await DB.getHighScores();
+  const scores = await DB.getScores();
   res.send(scores);
 });
 
 // SubmitScore
 apiRouter.post('/score', async (req, res) => {
   DB.addScore(req.body);
-  const scores = await DB.getHighScores();
+  const scores = await DB.getScores();
   res.send(scores);
 });
 
@@ -71,5 +71,5 @@ app.use((_req, res) => {
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
-});*/
+});
 
