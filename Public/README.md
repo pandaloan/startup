@@ -83,13 +83,13 @@ For this deliverable I built out the funcitonality of my application using Javas
 
 ## Service deliverable
 
-For this deliverable I added backend endpoints that stores and displayes username.
+For this deliverable I added backend endpoints that store and display username and player scores. A random quote is retrieved and displayed on the About page.
 
-    Node.js/Express HTTP service - done!
-    Static middleware for frontend - done!
-    Calls to third party endpoints - done!
-    Backend service endpoints - Placeholders for login that stores the current user on the server.
-    Frontend calls service endpoints - I did this using the fetch function.
+ - **Node.js/Express HTTP service** - done!
+ - **Static middleware for frontend** - done!
+ - **Calls to third party endpoints** - A random quote is retrieved and displayed on the About page.
+ - **Backend service endpoints** - Placeholders for login that stores the current user on the server.
+ - **Frontend calls service endpoints** - I did this using the fetch function.
 
 
 
