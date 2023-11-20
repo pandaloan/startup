@@ -1,6 +1,6 @@
 
 //express only, no database or mongodb involved in this section
-const express = require('express');
+/*const express = require('express');
 const app = express();
 
 // The service port. In production the frontend code is statically hosted by the service on the same port.
@@ -34,14 +34,14 @@ app.use((_req, res) => {
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
-});
+}); */
 
 
 
 
 
 
-/*
+
 //this section does stuff with mongodb
 
 const express = require('express');
@@ -110,5 +110,3 @@ app.use((_req, res) => {
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
-
-*/
