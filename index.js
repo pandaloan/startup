@@ -56,7 +56,7 @@ const config = require('./dbConfig.json');
 
 const DB = require('./database.js');
 
-async function main() {
+/*async function main() {
   // Connect to the database cluster
   const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
   const client = new MongoClient(url);
@@ -73,7 +73,7 @@ async function main() {
   });
 }
 
-main().catch(console.error);
+main().catch(console.error);*/
 
 
 // The service port. In production the application is statically hosted by the service on the same port.
