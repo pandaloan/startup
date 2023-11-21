@@ -96,8 +96,10 @@ For this deliverable I added backend endpoints that store and display username a
 For this deliverable I stored the scores in the database.
 
     MongoDB Atlas database created - done!
-    Endpoints for data - attempted
-    Stores data in MongoDB - attempted - 502 error
+    Endpoints for data - stubbed out endpoints process the data and send it to Mongo.
+    Stores data in MongoDB - attempted - done!
+
+## Login deliverable
 
 
 
