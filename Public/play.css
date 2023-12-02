@@ -12,6 +12,10 @@ header {
   color: rgb(235, 235, 83);
 }
 
+header .navbar-brand {
+  color: rgb(235, 235, 83);
+}
+
 
 main {
   background-color: black;
