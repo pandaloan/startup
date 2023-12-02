@@ -36,8 +36,8 @@ setInterval(() => {
 // Event messages - added with WebSocket funtionality
 const GameEndEvent = 'gameEnd';
 const GameStartEvent = 'gameStart';
-socket;
-
+var socket;
+let gameStarted;
 
 var playerRed = "R";
 var playerYellow = "Y";
@@ -59,6 +59,7 @@ window.onload = function() {
 function setGame() {
     board = []; //board starts out empty
     currColumns = [5, 5, 5, 5, 5, 5, 5];
+    gameStarted = false;
 
     for (let r = 0; r < rows; r++) { //rows are numbered 0-5
         let row = [];
@@ -75,12 +76,18 @@ function setGame() {
         }
         board.push(row); //adds row to javascript board
     }
+
 }
 
 function setPiece() {
     if (gameOver) {
         return;
     }
+    if (!gameStarted) {
+      broadcastEvent(getPlayerName(), GameStartEvent, {});
+      gameStarted = true;
+    }
+  
 
     //get coordinatess of that tile clicked
     let coords = this.id.split("-");
@@ -191,10 +198,9 @@ function setWinner(r, c) {
 const playerNameEl = document.querySelector('.player-name');
 playerNameEl.textContent = this.getPlayerName();
 
-this.configureWebSocket();
+configureWebSocket();
 
-// Let other players know a new game has started - added with WebSocket functionality
-this.broadcastEvent(this.getPlayerName(), GameStartEvent, {});
+
 
 
 function getPlayerName() {
@@ -298,21 +304,26 @@ async function saveScore(score) {
 
   function configureWebSocket() {
     const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
-    this.socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
-    this.socket.onopen = (event) => {
+    socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
+    socket.onopen = (event) => {
       this.displayMsg('system', 'game', 'connected');
     };
-    this.socket.onclose = (event) => {
-      this.displayMsg('system', 'game', 'disconnected');
+    socket.onclose = (event) => {
+      displayMsg('system', 'game', 'disconnected');
     };
-    this.socket.onmessage = async (event) => {
+    socket.onmessage = async (event) => {
       const msg = JSON.parse(await event.data.text());
       if (msg.type === GameEndEvent) {
-        this.displayMsg('player', msg.from, `scored ${msg.value.score}`);
+        displayMsg('player', msg.from, `scored ${msg.value.score}`);
       } else if (msg.type === GameStartEvent) {
-        this.displayMsg('player', msg.from, `started a new game`);
+        displayMsg('player', msg.from, `started a new game`);
+      }
+      else {
+        displayMsg('player', msg.from, 'has no idea what he is doing');
       }
     }
+    // Let other players know a new game has started - added with WebSocket functionality
+    //broadcastEvent(this.getPlayerName(), GameStartEvent, {});
   }
 
   function displayMsg(cls, from, msg) {
