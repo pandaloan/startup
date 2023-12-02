@@ -36,6 +36,7 @@ setInterval(() => {
 // Event messages - added with WebSocket funtionality
 const GameEndEvent = 'gameEnd';
 const GameStartEvent = 'gameStart';
+socket;
 
 
 var playerRed = "R";
