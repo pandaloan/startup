@@ -123,6 +123,7 @@ const bcrypt = require('bcrypt');
 const express = require('express');
 const app = express();
 const DB = require('./database.js');
+const { peerProxy } = require('./peerProxy.js'); // line added with websocket 12-2-23
 
 const authCookieName = 'token';
 
@@ -241,3 +242,5 @@ function setAuthCookie(res, authToken) {
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
+
+peerProxy(httpService); // line added with websocket 12-2-23
