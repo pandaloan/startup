@@ -20,11 +20,11 @@ main {
 
 #board {
   height: 540px;
-  width: 630px;
-  background-color: purple;
+  width: 580px; /*was width 630px, height 540px*/
+  background-color: darkblue;
   border: 10px solid blue;
   
-  margin: 0 auto;
+  margin: 0 auto; /*was margin: 0 auto;*/
   display: flex;
   flex-wrap: wrap;
 }
@@ -32,10 +32,10 @@ main {
 .tile {
   height: 70px;
   width: 70px;
-  margin: 5px;
+  margin: 5px; /*was 5px, or 0px*/
 
  /* Circle */
-  background-color: green;
+  background-color: lightskyblue;
   border-radius: 50%;
   border: 5px solid blue;
 }
