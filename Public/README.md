@@ -106,7 +106,17 @@ For this deliverable I associate the scores with the logged in user.
 - **User registration** - Creates a new account in the database.
 - **Existing user** - Stores the username ans password under the same user if the user already exists.
 - **Use MongoDB to store credentials** - Stores both user and their scores.
-- **Restricts functionality** - You cannot play, visit the About page, or visit the Scores page until you have logged in. 
+- **Restricts functionality** - You cannot play, visit the About page, or visit the Scores page until you have logged in.
+
+## WebSocket deliverable
+
+For this deliverable I used webSocket to update the player scores and status on the frontend in realtime.
+
+- **Backend listens for WebSocket connection** - done!
+- **Frontend makes WebSocket connection** - done!
+- **Data sent over WebSocket connection** - done!
+- **WebSocket data displayed** - All user player scores and status display in realtime.
+
 
 
 
