@@ -190,6 +190,8 @@ function setWinner(r, c) {
 const playerNameEl = document.querySelector('.player-name');
 playerNameEl.textContent = this.getPlayerName();
 
+this.configureWebSocket();
+
 // Let other players know a new game has started - added with WebSocket functionality
 this.broadcastEvent(this.getPlayerName(), GameStartEvent, {});
 
