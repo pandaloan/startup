@@ -117,6 +117,16 @@ For this deliverable I used webSocket to update the player scores and status on 
 - **Data sent over WebSocket connection** - done!
 - **WebSocket data displayed** - All user player scores and status display in realtime.
 
+## React deliverable
+
+For this deliverable I converted the application over to use React.
+
+- **Bundled and transpiled** - done!
+- **Components** - Login, about, scores, and play are all components.
+- **Router** - Routing between each component.
+- **Hooks** - done!
+
+
 
 
 
