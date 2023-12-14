@@ -39,6 +39,11 @@ const GameStartEvent = 'gameStart';
 var socket;
 let gameStarted;
 
+//music
+const sounds = [
+  { file: 'click1.wav' }
+]
+
 var playerRed = "R";
 var playerYellow = "Y";
 var currPlayer = playerRed;
@@ -79,6 +84,45 @@ function setGame() {
 
 }
 
+const clickSound = loadSound('click1.wav');
+
+//nirvana
+const nirvanaQuestions = ["Who founded Nirvana?", "Where was Nirvana formed?", "What year was Kurt Cobain born?","What is the middle name of Kurt Cobain's only child?", "When was the album Bleach released?", "When was the album Nevermind released?", "When was the album In Utero released?", "What year was Nirvana's last tour?", "Which Nirvana song is featured in the Lost TV episode titled Through the Looking Glass, Part 2?",
+ "Which Nirvana song's performances are ranked by its scream?", "In which country is Kurt Cobain thought to have screamed the best during the song Drain You?", "Which Nirvana song has the line 'I don't care what you think unless it is about me'?", "Which Nirvana song was originally titled The Eagle Has Landed?", "What is the longest Nirvana song title?", "Who did Kurt Cobain marry?",
+"Which alternative rock band is Courtney Love, Kurt Cobain's wife, in?", "Which Fender guitar did Kurt Cobain design?", "What was the first band Nirvana toured England with?", "Which Nirvana song was featured in the 2022 film The Batman?", "What is the longest Nirvana track?", "Which Nirvana song is named after an element of the periodic table?",
+"What is the most popular Nirvana song?", "Which Nirvana song was named after a brand of deodorant?", "Which member of Nirvana is now in the band Foo Fighters?", "Who is my favorite guitarist? (Hint: it's a member of Nirvana)", "Which member of Nirvana was in the movie Bill and Ted Face the Music?", "What is the coolest Nirvana song?", "Did Nirvana play Smells Like Teen Spirit at the 1993 MTV concert Live and Loud?",
+"Which Nirvana song on the album Bleach is about a character Kurt Cobain drew?", "Why did Kurt Cobain's hair often look dirty and matted?", "Which member of Nirvana is left-handed?", "Which member of Nirvana was the main singer/songwriter/guitarist?", "Who was Nirvana's longest drummer?", "Who was Nirvana's bassist?", "Who was the tallest member of Nirvana?", "How tall was Kurt Cobain?", "Which Nirvana song title is on the Welcome To Aberdeen city sign?",
+"Who wrote the parody song Smells Like Nirvana?"]
+const nirvanaAnswers = ["Kurt Cobain and Krist Novoselic", "Aberdeen, Washington", "1967", "Bean", "1989", "1991", "1993", "1994", "Scentless Apprentice",
+"Drain You", "France", "Drain You", "Tourette's", "Frances Farmer Will Have Her Revenge On Seattle", "Courtney Love", 
+"Hole", "Jag-Stang" ,"L7", "Something in the Way", "Endless, Nameless", "Lithium", 
+"Smells Like Teen Spirit", "Smells Like Teen Spirit", "Dave Grohl", "Dave Grohl", "Dave Grohl", "Radio Friendly Unit Shifter", "No", 
+"Mr. Moustache", "He cleaned it with a bar of soap", "Kurt Cobain", "Kurt Cobain", "Dave Grohl", "Krist Novoselic", "Krist Novoselic", "5'9", "Come As You Are", 
+"Weird Al Yankovic"]
+
+function getRandomInt() {
+  let min = 0;
+  let max = nirvanaQuestions.length - 1;
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+function updateQuestion(int) {
+  //let questionEl = document.getElementById("question");
+  //questionEl.innerText = nirvanaQuestions[int];
+  const questionEl = document.getElementById("question");
+  questionEl.textContent = nirvanaQuestions[int];
+}
+
+function updateAnswer(int) {
+  //let answerEl = document.getElementById("answer");
+  //answerEl.innerText = nirvanaAnswers[int];
+  const answerEl = document.getElementById("answer");
+  answerEl.textContent = nirvanaAnswers[int];
+}
+
+//end nirvana functions/lists, called in setPiece()
+
+let sameRandint;
+
 function setPiece() {
     if (gameOver) {
         return;
@@ -87,6 +131,8 @@ function setPiece() {
       broadcastEvent(getPlayerName(), GameStartEvent, {});
       gameStarted = true;
     }
+
+    clickSound.play();
   
 
     //get coordinatess of that tile clicked
@@ -103,13 +149,19 @@ function setPiece() {
 
     board[r][c] = currPlayer; //update JS board
     let tile = document.getElementById(r.toString() + "-" + c.toString());
+    let randint = getRandomInt() //check this
     if (currPlayer == playerRed) {
         tile.classList.add("red-piece");
         currPlayer = playerYellow;
+        updateQuestion(randint); //check this statement //added ;
+        sameRandint = randint
+        const answerEl = document.getElementById("answer");
+        answerEl.textContent = "--";
     }
     else {
         tile.classList.add("yellow-piece");
         currPlayer = playerRed;
+        updateAnswer(sameRandint); //check this statement // added semicolon
     }
 
     r -= 1; //update the row height for that column
@@ -244,6 +296,7 @@ function getPlayerName() {
   }*/
 
 
+
 function updateScore(score) {
     const scoreEl = document.querySelector('#score');
     scoreEl.textContent = score;
@@ -342,4 +395,28 @@ async function saveScore(score) {
   }
 
 
+
+
+// Work around Safari's rule to only play sounds if given permission.
+async function playClick(volume = 1.0) {
+  clickSound.volume = volume;
+  await new Promise((resolve) => {
+    clickSound.onended = resolve;
+    clickSound.play();
+  });
+}
+
+function loadSound(filename) {
+  return new Audio('assets/' + filename);
+}
+
+
+
+/**
+ * Returns a random integer between min (inclusive) and max (inclusive).
+ * The value is no lower than min (or the next integer greater than min
+ * if min isn't an integer) and no greater than max (or the next integer
+ * lower than max if max isn't an integer).
+ * Using Math.round() will give you a non-uniform distribution!
+ */
 

@@ -8,59 +8,68 @@ body {
   
   header {
     flex: 0 80px;
-    background-color: rgb(235, 235, 83);
-    color: red;
+    background-color: red;
+    color: rgb(235, 235, 83);
   }
-
-
+  
+  header .navbar-brand {
+    color: rgb(235, 235, 83);
+  }
+  
+  
   main {
     background-color: black;
     color: lightblue
   }
-
-  #board2 {
+  
+  .Nirvana {
+    margin: 0 auto;
+    color: orange;
+  }
+  
+  #board {
     height: 540px;
-    width: 630px;
-    background-color: purple;
+    width: 580px; /*was width 630px, height 540px*/
+    background-color: darkblue;
     border: 10px solid blue;
     
-    margin: 0 auto;
+    margin: 0 auto; /*was margin: 0 auto;*/
     display: flex;
     flex-wrap: wrap;
-}
-
+  }
+  
   .tile {
     height: 70px;
     width: 70px;
-    margin: 5px;
-
+    margin: 5px; /*was 5px, or 0px*/
+  
    /* Circle */
-    background-color: black;
+    background-color: lightskyblue;
     border-radius: 50%;
     border: 5px solid blue;
   }
-
-.red-piece {
+  
+  .red-piece {
   background-color: red;
-}
-
-.yellow-piece {
+  }
+  
+  .yellow-piece {
   background-color: yellow;
-}
-
-
+  }
+  
+  
   main .label {
     color: lightblue;
   }
-
+  
   li {
     margin-left: 0px;
     margin-right: 50px;
     color: black;
   }
-
   
-
+  
+  
   menu {
     flex: 1;
     display: flex;
@@ -69,16 +78,16 @@ body {
     list-style: none;
     color: red;
   }
-
+  
   footer {
     flex: 0 30px;
-    background: darkred;
+    background: rgb(235, 235, 83);
     color: black;
     font-style: italic;
   }
-
-
-#count {
+  
+  
+  #count {
     /*color: rgb(246, 239, 158);*/
     color: rgb(118, 190, 210)
   }
@@ -111,5 +120,7 @@ body {
   .system-event {
     color: rgb(221, 148, 40);
   }
+  
+  
   
   
