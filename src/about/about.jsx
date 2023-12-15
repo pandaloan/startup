@@ -60,8 +60,8 @@ export function About(props) {
         </p>
 
         <div className='quote-box bg-light text-dark'>
-          <p class="quote">Just because you're paranoid doesn't mean they aren't after you.</p>
-          <p class="author">Kurt Cobain and Joseph Heller</p>
+          <p className="quote">Just because you're paranoid doesn't mean they aren't after you.</p>
+          <p className="author">Kurt Cobain and Joseph Heller</p>
           <p className='quote'>{quote}</p>
           <p className='author'>{quoteAuthor}</p>
         </div>
