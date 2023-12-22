@@ -1378,7 +1378,918 @@ HTTP Semantics
 HTTP Semantics
 # field.content-type
 
-#4
+#4 Using HTTP cookies
+
+An HTTP cookie (web cookie, browser cookie) is a small piece of data that a server sends to a user's web browser. The browser may store the cookie and send it back to the same server with later requests. Typically, an HTTP cookie is used to tell if two requests come from the same browser—keeping a user logged in, for example. It remembers stateful information for the stateless HTTP protocol.
+
+Cookies are mainly used for three purposes:
+
+Session management
+
+    Logins, shopping carts, game scores, or anything else the server should remember
+Personalization
+
+    User preferences, themes, and other settings
+Tracking
+
+    Recording and analyzing user behavior
+
+Cookies were once used for general client-side storage. While this made sense when they were the only way to store data on the client, modern storage APIs are now recommended. Cookies are sent with every request, so they can worsen performance (especially for mobile data connections). Modern APIs for client storage are the Web Storage API (localStorage and sessionStorage) and IndexedDB.
+
+Note: To see stored cookies (and other storage that a web page can use), you can enable the Storage Inspector in Developer Tools and select Cookies from the storage tree.
+Creating cookies
+
+After receiving an HTTP request, a server can send one or more Set-Cookie headers with the response. The browser usually stores the cookie and sends it with requests made to the same server inside a Cookie HTTP header. You can specify an expiration date or time period after which the cookie shouldn't be sent. You can also set additional restrictions to a specific domain and path to limit where the cookie is sent. For details about the header attributes mentioned below, refer to the Set-Cookie reference article.
+The Set-Cookie and Cookie headers
+
+The Set-Cookie HTTP response header sends cookies from the server to the user agent. A simple cookie is set like this:
+http
+
+Set-Cookie: <cookie-name>=<cookie-value>
+
+This instructs the server sending headers to tell the client to store a pair of cookies:
+http
+
+HTTP/2.0 200 OK
+Content-Type: text/html
+Set-Cookie: yummy_cookie=choco
+Set-Cookie: tasty_cookie=strawberry
+
+[page content]
+
+Then, with every subsequent request to the server, the browser sends all previously stored cookies back to the server using the Cookie header.
+http
+
+GET /sample_page.html HTTP/2.0
+Host: www.example.org
+Cookie: yummy_cookie=choco; tasty_cookie=strawberry
+
+Note: Here's how to use the Set-Cookie header in various server-side applications:
+
+    PHP
+    Node.JS
+    Python
+    Ruby on Rails
+
+Define the lifetime of a cookie
+
+Cookies can persist for two different periods, depending on the attributes used with the Set-Cookie header when they were created:
+
+    Permanent cookies are deleted at a date specified by the Expires attribute or after a period prescribed by the Max-Age attribute.
+    Session cookies – cookies without a Max age or Expires attribute – are deleted when the current session ends. The browser defines when the "current session" ends, and some browsers use session restoring when restarting. This can cause session cookies to last indefinitely.
+
+For example:
+http
+
+Set-Cookie: id=a3fWa; Expires=Thu, 31 Oct 2021 07:28:00 GMT;
+
+Note: When you set an Expires date and time, they're relative to the client the cookie is being set on, not the server.
+
+If your site authenticates users, it should regenerate and resend session cookies, even ones that already exist, whenever a user authenticates. This approach helps prevent session fixation attacks, where a third party can reuse a user's session.
+Restrict access to cookies
+
+You can ensure that cookies are sent securely and aren't accessed by unintended parties or scripts in one of two ways: with the Secure attribute and the HttpOnly attribute.
+
+A cookie with the Secure attribute is only sent to the server with an encrypted request over the HTTPS protocol. It's never sent with unsecured HTTP (except on localhost), which means man-in-the-middle attackers can't access it easily. Insecure sites (with http: in the URL) can't set cookies with the Secure attribute. However, don't assume that Secure prevents all access to sensitive information in cookies. For example, someone with access to the client's hard disk (or JavaScript if the HttpOnly attribute isn't set) can read and modify the information.
+
+A cookie with the HttpOnly attribute is inaccessible to the JavaScript Document.cookie API; it's only sent to the server. For example, cookies that persist in server-side sessions don't need to be available to JavaScript and should have the HttpOnly attribute. This precaution helps mitigate cross-site scripting (XSS) attacks.
+
+Here's an example:
+http
+
+Set-Cookie: id=a3fWa; Expires=Thu, 21 Oct 2021 07:28:00 GMT; Secure; HttpOnly
+
+Define where cookies are sent
+
+The Domain and Path attributes define the scope of a cookie: what URLs the cookies should be sent to.
+Domain attribute
+
+The Domain attribute specifies which server can receive a cookie.
+
+If specified, then cookies are available on the server and its subdomains. For example, if you set Domain=mozilla.org, cookies are available on mozilla.org and its subdomains like developer.mozilla.org.
+
+If the server does not specify a Domain, the cookies are available on the server but not on its subdomains. Therefore, specifying Domain is less restrictive than omitting it. However, it can be helpful when subdomains need to share information about a user.
+Path attribute
+
+The Path attribute indicates a URL path that must exist in the requested URL in order to send the Cookie header. The %x2F ("/") character is considered a directory separator, and subdirectories match as well.
+
+For example, if you set Path=/docs, these request paths match:
+
+    /docs
+    /docs/
+    /docs/Web/
+    /docs/Web/HTTP
+
+But these request paths don't:
+
+    /
+    /docsets
+    /fr/docs
+
+SameSite attribute
+
+The SameSite attribute lets servers specify whether/when cookies are sent with cross-site requests (where Site is defined by the registrable domain and the scheme: http or https). This provides some protection against cross-site request forgery attacks (CSRF). It takes three possible values: Strict, Lax, and None.
+
+With Strict, the browser only sends the cookie with requests from the cookie's origin site. Lax is similar, except the browser also sends the cookie when the user navigates to the cookie's origin site (even if the user is coming from a different site). For example, by following a link from an external site. None specifies that cookies are sent on both originating and cross-site requests, but only in secure contexts (i.e., if SameSite=None then the Secure attribute must also be set). If no SameSite attribute is set, the cookie is treated as Lax.
+
+Here's an example:
+http
+
+Set-Cookie: mykey=myvalue; SameSite=Strict
+
+Note: The standard related to SameSite recently changed (MDN documents the new behavior above). See the cookies Browser compatibility table for information about how the attribute is handled in specific browser versions:
+
+    SameSite=Lax is the new default if SameSite isn't specified. Previously, cookies were sent for all requests by default.
+    Cookies with SameSite=None must now also specify the Secure attribute (they require a secure context).
+    Cookies from the same domain are no longer considered to be from the same site if sent using a different scheme (http: or https:).
+
+Cookie prefixes
+
+Because of the design of the cookie mechanism, a server can't confirm that a cookie was set from a secure origin or even tell where a cookie was originally set.
+
+A vulnerable application on a subdomain can set a cookie with the Domain attribute, which gives access to that cookie on all other sub
+
+#5 
+#6 # Fetch
+
+🔑 **Recommended reading**: [MDN Using the Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch)
+
+The ability to make HTTP requests from JavaScript is one of the main technologies that changed the web from static content pages (Web 1.0) to one of web applications (Web 2.0) that fully interact with the user. Microsoft introduced the first API for making HTTP requests from JavaScript with the [XMLHttpRequest API](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest).
+
+Today, the [fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) is the preferred way to make HTTP requests. The `fetch` function is built into the browser's JavaScript runtime. This means you can call it from JavaScript code running in a browser.
+
+The basic usage of fetch takes a URL and returns a promise. The promise `then` function takes a callback function that is asynchronously called when the requested URL content is obtained. If the returned content is of type `application/json` you can use the `json` function on the response object to convert it to a JavaScript object.
+
+The following example makes a fetch request to get and display an inspirational quote.
+
+```js
+fetch('https://api.quotable.io/random')
+  .then((response) => response.json())
+  .then((jsonResponse) => {
+    console.log(jsonResponse);
+  });
+```
+
+**Response**
+
+```js
+{
+  content: 'Never put off till tomorrow what you can do today.',
+  author: 'Thomas Jefferson',
+};
+```
+
+To do a POST request you populate the options parameter with the HTTP method and headers.
+
+```js
+fetch('https://jsonplaceholder.typicode.com/posts', {
+  method: 'POST',
+  body: JSON.stringify({
+    title: 'test title',
+    body: 'test body',
+    userId: 1,
+  }),
+  headers: {
+    'Content-type': 'application/json; charset=UTF-8',
+  },
+})
+  .then((response) => response.json())
+  .then((jsonResponse) => {
+    console.log(jsonResponse);
+  });
+```
+
+## ☑ Assignment
+
+Create a fork of this [CodePen](https://codepen.io/leesjensen/pen/ExRoqPz) and experiment.
+
+Replace the quotable service call with a different one. Here are some suggestions.
+
+- **Random user** - https://randomuser.me/api/
+- **Jokes** - https://api.chucknorris.io/jokes/random
+- **GitHub user** - https://api.github.com/users/octocat
+- **Photos** - https://picsum.photos/id/0/info
+- **Quote** - https://api.quotable.io/random
+
+When you are done submit your CodePen URL to the Canvas assignment.
+
+Don't forget to update your GitHub startup repository notes.md with all of the things you learned and want to remember.
+
+#7
+Query Documents
+
+You can query documents in MongoDB by using the following methods:
+
+    Your programming language's driver.
+
+    The MongoDB Atlas UI. To learn more, see Query Documents with MongoDB Atlas.
+
+    MongoDB Compass.
+
+➤ Use the Select your language drop-down menu in the upper-right to set the language of the following examples or select MongoDB Compass.
+
+This page provides examples of query operations using the Collection.find()
+method in the MongoDB Node.js Driver.
+
+The examples on this page use the inventory collection. Connect to a test database in your MongoDB instance then create the inventory collection:
+
+await db.collection('inventory').insertMany([
+  {
+    item: 'journal',
+    qty: 25,
+    size: { h: 14, w: 21, uom: 'cm' },
+    status: 'A'
+  },
+  {
+    item: 'notebook',
+    qty: 50,
+    size: { h: 8.5, w: 11, uom: 'in' },
+    status: 'A'
+  },
+  {
+    item: 'paper',
+    qty: 100,
+    size: { h: 8.5, w: 11, uom: 'in' },
+    status: 'D'
+  },
+  {
+    item: 'planner',
+    qty: 75,
+    size: { h: 22.85, w: 30, uom: 'cm' },
+    status: 'D'
+  },
+  {
+    item: 'postcard',
+    qty: 45,
+    size: { h: 10, w: 15.25, uom: 'cm' },
+    status: 'A'
+  }
+]);
+
+Select All Documents in a Collection
+
+To select all documents in the collection, pass an empty document as the query filter parameter to the find method. The query filter parameter determines the select criteria:
+
+const cursor = db.collection('inventory').find({});
+
+This operation uses a filter predicate of {}, which corresponds to the following SQL statement:
+
+SELECT * FROM inventory
+
+To see supported options for the find() method, see find().
+Specify Equality Condition
+
+To specify equality conditions, use <field>:<value> expressions in the query filter document:
+
+{ <field1>: <value1>, ... }
+
+The following example selects from the inventory collection all documents where the status equals "D":
+
+const cursor = db.collection('inventory').find({ status: 'D' });
+
+This operation uses a filter predicate of { status: "D" }, which corresponds to the following SQL statement:
+
+SELECT * FROM inventory WHERE status = "D"
+
+Note
+
+The MongoDB Compass query bar autocompletes the current query based on the keys in your collection's documents, including keys in embedded sub-documents.
+Specify Conditions Using Query Operators
+
+A query filter document can use the query operators to specify conditions in the following form:
+
+{ <field1>: { <operator1>: <value1> }, ... }
+
+The following example retrieves all documents from the inventory collection where status equals either "A" or "D":
+
+const cursor = db.collection('inventory').find({
+  status: { $in: ['A', 'D'] }
+});
+
+Note
+
+Although you can express this query using the $or operator, use the $in operator rather than the $or operator when performing equality checks on the same field.
+
+The operation uses a filter predicate of { status: { $in: [ "A", "D" ] } }, which corresponds to the following SQL statement:
+
+SELECT * FROM inventory WHERE status in ("A", "D")
+
+Refer to the Query and Projection Operators document for the complete list of MongoDB query operators.
+Specify AND Conditions
+
+A compound query can specify conditions for more than one field in the collection's documents. Implicitly, a logical AND conjunction connects the clauses of a compound query so that the query selects the documents in the collection that match all the conditions.
+
+The following example retrieves all documents in the inventory collection where the status equals "A" and qty is less than ($lt) 30:
+
+const cursor = db.collection('inventory').find({
+  status: 'A',
+  qty: { $lt: 30 }
+});
+
+The operation uses a filter predicate of { status: "A", qty: { $lt: 30 } }, which corresponds to the following SQL statement:
+
+SELECT * FROM inventory WHERE status = "A" AND qty < 30
+
+See comparison operators for other MongoDB comparison operators.
+Specify OR Conditions
+
+Using the $or operator, you can specify a compound query that joins each clause with a logical OR conjunction so that the query selects the documents in the collection that match at least one condition.
+
+The following example retrieves all documents in the collection where the status equals "A" or qty is less than ($lt) 30:
+
+const cursor = db.collection('inventory').find({
+  $or: [{ status: 'A' }, { qty: { $lt: 30 } }]
+});
+
+The operation uses a filter predicate of { $or: [ { status: 'A' }, { qty: { $lt: 30 } } ] }, which corresponds to the following SQL statement:
+
+SELECT * FROM inventory WHERE status = "A" OR qty < 30
+
+Note
+
+Queries that use comparison operators are subject to Type Bracketing.
+Specify AND as well as OR Conditions
+
+In the following example, the compound query document selects all documents in the collection where the status equals "A" and either qty is less than ($lt) 30 or item starts with the character p:
+
+const cursor = db.collection('inventory').find({
+  status: 'A',
+  $or: [{ qty: { $lt: 30 } }, { item: { $regex: '^p' } }]
+});
+
+The operation uses a filter predicate of:
+
+{
+   status: 'A',
+   $or: [
+     { qty: { $lt: 30 } }, { item: { $regex: '^p' } }
+   ]
+}
+
+which corresponds to the following SQL statement:
+
+SELECT * FROM inventory WHERE status = "A" AND ( qty < 30 OR item LIKE "p%")
+
+Note
+
+MongoDB supports regular expressions $regex queries to perform string pattern matches.
+Query Documents with MongoDB Atlas
+
+The example in this section uses the sample movies dataset. To learn how to load the sample dataset into your MongoDB Atlas deployment, see Load Sample Data.
+
+To project fields to return from a query in MongoDB Atlas, follow these steps:
+1
+Navigate to the collection
+
+    In the MongoDB Atlas UI, click Database in the sidebar.
+
+    For the database deployment that contains the sample data, click Browse Collections.
+
+    In the left navigation pane, select the sample_mflix database.
+
+    Select the movies collection.
+
+2
+Specify the Filter field
+
+Specify the query filter document in the Filter field. A query filter document uses query operators to specify search conditions.
+
+Copy the following query filter document into the Filter search bar:
+
+{ year: 1924 }
+
+3
+Click Apply
+
+This query filter returns all documents in the sample_mflix.movies collection where the year field matches 1924.
+Additional Query Tutorials
+
+For additional query examples, see:
+
+    Query on Embedded/Nested Documents
+
+    Query an Array
+
+    Query an Array of Embedded Documents
+
+    Project Fields to Return from Query
+
+    Query for Null or Missing Fields
+
+Behavior
+Cursor
+
+The Collection.find()
+method returns a cursor.
+Read Isolation
+
+For reads to Replica sets and replica set shards, read concern allows clients to choose a level of isolation for their reads. For more information, see Read Concern.
+Query Result Format
+
+When you run a find operation with a MongoDB driver or mongosh, the command returns a cursor that manages query results. The query results are not returned as an array of documents.
+
+To learn how to iterate through documents in a cursor, refer to your driver's documentation. If you are using mongosh, see Iterate a Cursor in mongosh.
+Additional Methods and Options
+
+The following methods can also read documents from a collection:
+
+    Collection.findOne()
+
+In aggregation pipeline, the $match pipeline stage provides access to MongoDB queries. See the MongoDB Node.js Driver's aggregation tutorial.
+Note
+
+The Collection.findOne()
+method also performs a read operation to return a single document. Internally, the Collection.findOne()
+method is the Collection.find()
+
+method with a limit of 1.
+←  Insert Methods
+
+# 8
+# Account creation and login
+
+The first step towards supporting authentication in your web application is providing a way for users to uniquely identify themselves. This usually requires two service endpoints. One to initially `create` an authentication credential, and a second to authenticate, or `login`, on future visits. Once a user is authenticated we can control access to other endpoints. For example, web services often have a `getMe` endpoint that gives information about the currently authenticated user. We will implement this endpoint to demonstrate that authentication is actually working correctly.
+
+## Endpoint design
+
+Using HTTP we can map out the design of each of our endpoints.
+
+### Create authentication endpoint
+
+This takes an email and password and returns a cookie containing the authentication token and user ID. If the email already exists it returns a 409 (conflict) status code.
+
+```http
+POST /auth/create HTTP/2
+Content-Type: application/json
+
+{
+  "email":"marta@id.com",
+  "password":"toomanysecrets"
+}
+```
+
+```http
+HTTP/2 200 OK
+Content-Type: application/json
+Set-Cookie: auth=tokenHere
+
+{
+  "id":"337"
+}
+```
+
+### Login authentication endpoint
+
+This takes an email and password and returns a cookie containing the authentication token and user ID. If the email does not exist or the password is bad it returns a 401 (unauthorized) status code.
+
+```http
+POST /auth/login HTTP/2
+Content-Type: application/json
+
+{
+  "email":"marta@id.com",
+  "password":"toomanysecrets"
+}
+```
+
+```http
+HTTP/2 200 OK
+Content-Type: application/json
+Set-Cookie: auth=tokenHere
+
+{
+  "id":"337"
+}
+
+```
+
+### GetMe endpoint
+
+This uses the authentication token stored in the cookie to look up and return information about the authenticated user. If the token or user do not exist it returns a 401 (unauthorized) status code.
+
+```http
+GET /user/me HTTP/2
+Cookie: auth=tokenHere
+```
+
+```http
+HTTP/2 200 OK
+Content-Type: application/json
+
+{
+  "email":"marta@id.com"
+}
+
+```
+
+## Web service
+
+With our service endpoints designed, we can now build our web service using Express.
+
+```js
+const express = require('express');
+const app = express();
+
+app.post('/auth/create', async (req, res) => {
+  res.send({ id: 'user@id.com' });
+});
+
+app.post('/auth/login', async (req, res) => {
+  res.send({ id: 'user@id.com' });
+});
+
+const port = 8080;
+app.listen(port, function () {
+  console.log(`Listening on port ${port}`);
+});
+```
+
+Follow these steps, and then add in the code from the sections that follow. There is a copy of the final version of the example at the end of this instruction. If you get lost, or things are not working as expected, refer to the final version.
+
+1. Create a directory called `authTest` that we will work in.
+1. Save the above content to a file named `main.js`. This is our starting web service.
+1. Run `npm init -y` to initialize the project to work with node.js.
+1. Run `npm install express cookie-parser mongodb uuid bcrypt` to install all of the packages we are going to use.
+1. Run `node main.js` or press `F5` in VS Code to start up the web service.
+1. You can now open a console window and use `curl` to try out one of the endpoints.
+
+   ```sh
+   curl -X POST localhost:8080/auth/create
+   ```
+   ```sh
+   {"id":"user@id.com"}
+   ```
+
+## Handling requests
+
+With our basic service created, we can now implement the create authentication endpoint. The first step is to read the credentials from the body of the HTTP request. Since the body is designed to contain JSON we need to tell Express that it should parse HTTP requests, with a content type of `application/json`, automatically into a JavaScript object. We do this by using the `express.json` middleware. We can then read the email and password directly out of the `req.body` object. We can test that this is working by temporarily including them in the response.
+
+```js
+app.use(express.json());
+
+app.post('/auth/create', (req, res) => {
+  res.send({
+    id: 'user@id.com',
+    email: req.body.email,
+    password: req.body.password,
+  });
+});
+```
+
+```sh
+curl -X POST localhost:8080/auth/create -H 'Content-Type:application/json' -d '{"email":"marta@id.com", "password":"toomanysecrets"}'
+```
+```sh
+{"id":"user@id.com","email":"marta@id.com","password":"toomanysecrets"}
+```
+
+Now that we have proven that we can parse the request bodies correctly, we can change the code to add a check to see if we already have a user with that email address. If we do, then we immediately return a 409 (conflict) status code. Otherwise we create a new user and return the user ID.
+
+```js
+app.post('/auth/create', async (req, res) => {
+  if (await getUser(req.body.email)) {
+    res.status(409).send({ msg: 'Existing user' });
+  } else {
+    const user = await createUser(req.body.email, req.body.password);
+    res.send({
+      id: user._id,
+    });
+  }
+});
+```
+
+## Using the database
+
+We want to persistently store our users in Mongo and so we need to set up our code to connect to and use the database. This code is explained in the instruction on [data services](../dataServices/dataServices.md) if you want to review what it is doing.
+
+```js
+const { MongoClient } = require('mongodb');
+
+const userName = 'holowaychuk';
+const password = 'express';
+const hostname = 'mongodb.com';
+
+const url = `mongodb+srv://${userName}:${password}@${hostname}`;
+
+const client = new MongoClient(url);
+```
+
+With a Mongo collection object we can implement the `getUser` and `createUser` functions.
+
+```js
+function getUser(email) {
+  return collection.findOne({ email: email });
+}
+
+async function createUser(email, password) {
+  const user = {
+    email: email,
+    password: password,
+    token: 'xxx',
+  };
+  return collection.insertOne(user);
+}
+```
+
+But, we are missing a couple of things. We need a real authentication token, and we cannot simply store a clear text password in our database.
+
+## Generating authentication tokens
+
+To generate a reasonable authentication token we use the `uuid` package. [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier) stands for Universally Unique Identifier, and it does a really good job creating a hard to guess, random, unique ID.
+
+```js
+const uuid = require('uuid');
+
+token: uuid.v4();
+```
+
+## Securing passwords
+
+Next we need to securely store our passwords. Failing to do so is a major security concern. If, and it has happened to many major companies, a hacker is able to access the database, they will have the passwords for all of your users. This may not seem like a big deal if your application is not very valuable, but users often reuse passwords. That means you will also provide the hacker with the means to attack the user on many other websites.
+
+So instead of storing the password directly, we want to cryptographically hash the password so that we never store the actual password. When we want to validate a password during login, we can hash the login password and compare it to our stored hash of the password.
+
+To hash our passwords we will use the `bcrypt` package. This creates a very secure one-way hash of the password. If you are interested in understanding how [bcrypt](https://en.wikipedia.org/wiki/Bcrypt) works, it is definitely worth the time.
+
+```js
+const bcrypt = require('bcrypt');
+
+async function createUser(email, password) {
+  // Hash the password before we insert it into the database
+  const passwordHash = await bcrypt.hash(password, 10);
+
+  const user = {
+    email: email,
+    password: passwordHash,
+    token: uuid.v4(),
+  };
+  await collection.insertOne(user);
+
+  return user;
+}
+```
+
+## Passing authentication tokens
+
+We now need to pass our generated authentication token to the browser when the login endpoint is called, and get it back on subsequent requests. To do this we use HTTP cookies. The `cookie-parser` package provides middleware for cookies and so we will leverage that.
+
+We import the `cookieParser` object and then tell our app to use it. When a user is successfully created, or logs in, we set the cookie header. Since we are storing an authentication token in the cookie, we want to make it as secure as possible, and so we use the `httpOnly`, `secure`, and `sameSite` options.
+
+- `httpOnly` tells the browser to not allow JavaScript running on the browser to read the cookie.
+- `secure` requires HTTPS to be used when sending the cookie back to the server.
+- `sameSite` will only return the cookie to the domain that generated it.
+
+```js
+const cookieParser = require('cookie-parser');
+
+// Use the cookie parser middleware
+app.use(cookieParser());
+
+apiRouter.post('/auth/create', async (req, res) => {
+  if (await DB.getUser(req.body.email)) {
+    res.status(409).send({ msg: 'Existing user' });
+  } else {
+    const user = await DB.createUser(req.body.email, req.body.password);
+
+    // Set the cookie
+    setAuthCookie(res, user.token);
+
+    res.send({
+      id: user._id,
+    });
+  }
+});
+
+function setAuthCookie(res, authToken) {
+  res.cookie('token', authToken, {
+    secure: true,
+    httpOnly: true,
+    sameSite: 'strict',
+  });
+}
+```
+
+## Login endpoint
+
+The login authorization endpoint needs to get the hashed password from the database, compare it to the provided password using `bcrypt.compare`, and if successful set the authentication token in the cookie. If the password does not match, or there is no user with the given email, the endpoint returns status 401 (unauthorized).
+
+```js
+app.post('/auth/login', async (req, res) => {
+  const user = await getUser(req.body.email);
+  if (user) {
+    if (await bcrypt.compare(req.body.password, user.password)) {
+      setAuthCookie(res, user.token);
+      res.send({ id: user._id });
+      return;
+    }
+  }
+  res.status(401).send({ msg: 'Unauthorized' });
+});
+```
+
+## GetMe endpoint
+
+With everything in place to create credentials and login using the credentials, we can now implement the `getMe` endpoint to demonstrate that it all actually works. To implement this we get the user object from the database by querying on the authentication token. If there is not an authentication token, or there is no user with that token, we return status 401 (unauthorized).
+
+```js
+app.get('/user/me', async (req, res) => {
+  authToken = req.cookies['token'];
+  const user = await collection.findOne({ token: authToken });
+  if (user) {
+    res.send({ email: user.email });
+    return;
+  }
+  res.status(401).send({ msg: 'Unauthorized' });
+});
+```
+
+## Final code
+
+Here is the full example code.
+
+```js
+const { MongoClient } = require('mongodb');
+const uuid = require('uuid');
+const bcrypt = require('bcrypt');
+const cookieParser = require('cookie-parser');
+const express = require('express');
+const app = express();
+
+const userName = 'holowaychuk';
+const password = 'express';
+const hostname = 'mongodb.com';
+
+const url = `mongodb+srv://${userName}:${password}@${hostname}`;
+const client = new MongoClient(url);
+const collection = client.db('authTest').collection('user');
+
+app.use(cookieParser());
+app.use(express.json());
+
+// createAuthorization from the given credentials
+app.post('/auth/create', async (req, res) => {
+  if (await getUser(req.body.email)) {
+    res.status(409).send({ msg: 'Existing user' });
+  } else {
+    const user = await createUser(req.body.email, req.body.password);
+    setAuthCookie(res, user.token);
+    res.send({
+      id: user._id,
+    });
+  }
+});
+
+// loginAuthorization from the given credentials
+app.post('/auth/login', async (req, res) => {
+  const user = await getUser(req.body.email);
+  if (user) {
+    if (await bcrypt.compare(req.body.password, user.password)) {
+      setAuthCookie(res, user.token);
+      res.send({ id: user._id });
+      return;
+    }
+  }
+  res.status(401).send({ msg: 'Unauthorized' });
+});
+
+// getMe for the currently authenticated user
+app.get('/user/me', async (req, res) => {
+  authToken = req.cookies['token'];
+  const user = await collection.findOne({ token: authToken });
+  if (user) {
+    res.send({ email: user.email });
+    return;
+  }
+  res.status(401).send({ msg: 'Unauthorized' });
+});
+
+function getUser(email) {
+  return collection.findOne({ email: email });
+}
+
+async function createUser(email, password) {
+  const passwordHash = await bcrypt.hash(password, 10);
+  const user = {
+    email: email,
+    password: passwordHash,
+    token: uuid.v4(),
+  };
+  await collection.insertOne(user);
+
+  return user;
+}
+
+function setAuthCookie(res, authToken) {
+  res.cookie('token', authToken, {
+    secure: true,
+    httpOnly: true,
+    sameSite: 'strict',
+  });
+}
+
+const port = 8080;
+app.listen(port, function () {
+  console.log(`Listening on port ${port}`);
+});
+```
+
+## Experiment
+
+With everything implemented we can use `curl` to try it out. First start up the web service from VS Code by pressing `F5` and selecting `node.js` as the debugger if you have not already done that. You can set breakpoints on all of the different endpoints to see what they do and inspect the different variables. Then open a console window and run the following `curl` commands. You should see similar results as what is shown below. Note that the `-c` and `-b` parameters tell curl to store and use cookies with the given file.
+
+```sh
+curl -X POST localhost:8080/auth/create -H 'Content-Type:application/json' -d '{"email":"지안@id.com", "password":"toomanysecrets"}'
+```
+```sh
+{"id":"639bb9d644416bf7278dde44"}
+```
+
+```sh
+curl -c cookie.txt -X POST localhost:8080/auth/login -H 'Content-Type:application/json' -d '{"email":"지안@id.com", "password":"toomanysecrets"}'
+```
+```sh
+{"id":"639bb9d644416bf7278dde44"}
+```
+
+```sh
+curl -b cookie.txt localhost:8080/user/me
+```
+```sh
+{"email":"지안@id.com"}
+```
+# 9
+# 10
+ The WebSocket Protocol
+
+Abstract
+
+   The WebSocket Protocol enables two-way communication between a client
+   running untrusted code in a controlled environment to a remote host
+   that has opted-in to communications from that code.  The security
+   model used for this is the origin-based security model commonly used
+   by web browsers.  The protocol consists of an opening handshake
+   followed by basic message framing, layered over TCP.  The goal of
+   this technology is to provide a mechanism for browser-based
+   applications that need two-way communication with servers that does
+   not rely on opening multiple HTTP connections (e.g., using
+   XMLHttpRequest or <iframe>s and long polling).
+The WebSocket Protocol is designed to supersede existing bidirectional communication technologies that use HTTP as a transport layer to benefit from existing infrastructure (proxies, filtering, authentication).
+# WebSocket
+
+![webSocket](webServicesWebSocketsLogo.png)
+
+HTTP is based on a client-server architecture. A client always initiates the request and the server responds. This is great if you are building a global document library connected by hyperlinks, but for many other use cases it just doesn't work. Applications for notifications, distributed task processing, peer-to-peer communication, or asynchronous events need communication that is initiated by two or more connected devices.
+
+For years, web developers created hacks to work around the limitation of the client/server model. This included solutions like having the client frequently pinging the server to see if the server had anything to say, or keeping client-initiated connections open for a very long time as the client waited for some event to happen on the server. Needless to say, none of these solutions were elegant or efficient.
+
+Finally, in 2011 the communication protocol WebSocket was created to solve this problem. The core feature of WebSocket is that it is fully duplexed. This means that after the initial connection is made from a client, using vanilla HTTP, and then upgraded by the server to a WebSocket connection, the relationship changes to a peer-to-peer connection where either party can efficiently send data at any time.
+
+![WebSocket Upgrade](webServicesWebSocketUpgrade.jpg)
+
+WebSocket connections are still only between two parties. So if you want to facilitate a conversation between a group of users, the server must act as the intermediary. Each peer first connects to the server, and then the server forwards messages amongst the peers.
+
+![WebSocket Peers](webServicesWebSocketPeers.jpg)
+
+## Creating a WebSocket conversation
+
+JavaScript running on a browser can initiate a WebSocket connection with the browser's WebSocket API. First you create a WebSocket object by specifying the port you want to communicate on.
+
+You can then send messages with the `send` function, and register a callback using the `onmessage` function to receive messages.
+
+```js
+const socket = new WebSocket('ws://localhost:9900');
+
+socket.onmessage = (event) => {
+  console.log('received: ', event.data);
+};
+
+socket.send('I am listening');
+```
+
+The server uses the `ws` package to create a WebSocketServer that is listening on the same port the browser is using. By specifying a port when you create the WebSocketServer, you are telling the server to listen for HTTP connections on that port and to automatically upgrade them to a WebSocket connection if the request has a `connection: Upgrade` header.
+
+When a connection is detected it calls the server's `on connection` callback. The server can then send messages with the `send` function, and register a callback using the `on message` function to receive messages.
+
+```js
+const { WebSocketServer } = require('ws');
+
+const wss = new WebSocketServer({ port: 9900 });
+
+wss.on('connection', (ws) => {
+  ws.on('message', (data) => {
+    const msg = String.fromCharCode(...data);
+    console.log('received: %s', msg);
+
+    ws.send(`I heard you say "${msg}"`);
+  });
+
+  ws.send('Hello webSocket');
+});
+```
+
+In a later instruction we will show you how to run and debug this example.
+
+# 11
 
 
 
