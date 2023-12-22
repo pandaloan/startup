@@ -3347,5 +3347,477 @@ Previous
 
 # 21
 
+# Node.js
 
+![Node Icon](NodeIcon.png)
 
+In 2009 Ryan Dahl created `Node.js`. It was the first successful application for deploying JavaScript outside of a browser. This changed the JavaScript mindset from a browser technology to one that could run on the server as well. This means that JavaScript can power your entire technology stack. One language to rule them all. Node.js is often just referred to as Node, and is currently maintained by the [Open.js Foundation](https://openjsf.org/).
+
+![Ryan Dahl](webServicesRyanDahl.jpg)
+
+> “You can never understand everything. But, you should push yourself to understand the system”
+>
+> — Ryan Dahl
+
+Browsers run JavaScript using a JavaScript interpreter and execution engine. For example, Chromium based browsers all use the [V8](https://v8.dev/) engine created by Google. Node.js simply took the V8 engine and ran it inside of a console application. When you run a JavaScript program in Chrome or Node.js, it is V8 that reads your code and executes it. With either program wrapping V8, the result is the same.
+
+![Node.js](webServicesNode.jpg)
+
+## Installing NVM and Node.js
+
+Your production environment web server comes with Node.js already installed. However, you will need to install Node.js in your development environment if you have not already. The easiest way to install Node.js is to first install the `Node Version Manager` (NVM) and use it to install, and manage, Node.js.
+
+### Installing on Windows
+
+If you are using Windows, then follow the installation instructions from the [windows-nvm](https://github.com/coreybutler/nvm-windows#installation--upgrades) repository. Click on `latest installer` and then scroll down to the `Assets` and download and execute nvm-setup.exe. Once the installation is complete, you will need to open a new console window so that it gets the updated path that includes NVM.
+
+In the console application install the long term support (LTS) version of Node.
+
+```sh
+➜ nvm install lts
+➜ nvm use lts
+```
+
+### Installing on Linux or MacOS
+
+If you are using Linux or MacOS then you can install NVM with the following console commands.
+
+```sh
+➜ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+
+➜ . ~/.nvm/nvm.sh
+```
+
+In the console application install the long term support (LTS) version of Node.
+
+```sh
+➜ nvm install --lts
+```
+
+## Checking that Node is installed
+
+The node.js console application is simply called `node`. You can verify that Node is working correctly by running `node` with the `-v` parameter. Note that your version might be different than what is shown here. As long as it is an LTS version you should be fine.
+
+```sh
+➜ node -v
+v18.13.0
+```
+
+## Running programs
+
+You can execute a line of JavaScript with Node.js from your console with the `-e` parameter.
+
+```sh
+➜  node -e "console.log(1+1)"
+2
+```
+
+However, to do real work you need to execute an entire project composed of dozens or even hundreds of JavaScript files. You do this by creating a single starting JavaScript file, named something like `index.js`, that references the code found in the rest of your project. You then execute your code by running `node` with `index.js` as a parameter. For example, with the following JavaScript saved to a file named `index.js`
+
+```js
+function countdown() {
+  let i = 0;
+  while (i++ < 5) {
+    console.log(`Counting ... ${i}`);
+  }
+}
+
+countdown();
+```
+
+We can execute the JavaScript by passing the file to `node`, and receive the following result.
+
+```sh
+➜  node index.js
+Counting ... 1
+Counting ... 2
+Counting ... 3
+Counting ... 4
+Counting ... 5
+```
+
+You can also run `node` in interpretive mode by executing it without any parameters and then typing your JavaScript code directly into the interpreter.
+
+```sh
+➜ node
+Welcome to Node.js v16.15.1.
+> 1+1
+2
+> console.log('hello')
+hello
+```
+
+## Node package manager
+
+While you could write all of the JavaScript for everything you need, it is always helpful to use preexisting packages of JavaScript for implementing common tasks. To load a package using Node.js you must take two steps. First install the package locally on your machine using the Node Package Manager (NPM), and then include a `require` statement in your code that references the package name. NPM is automatically installed when you install Node.js.
+
+NPM knows how to access a massive repository of preexisting packages. You can search for packages on the [NPM website](https://www.npmjs.com/). However, before you start using NPM to install packages you need to initialize your code to use NPM. This is done by creating a directory that will contain your JavaScript and then running `npm init`. NPM will step you through a series of questions about the project you are creating. You can press the return key for each of questions if you want to accept the defaults. If you are always going to accept all of the defaults you can use `npm init -y` and skip the Q&A.
+
+```sh
+➜  mkdir npmtest
+➜  cd npmtest
+➜  npm init -y
+```
+
+## Package.json
+
+If you list the files in the directory you will notice that it has created a file named `package.json`. This file contains three main things: 1) Metadata about your project such as its name and the default entry JavaScript file, 2) commands (scripts) that you can execute to do things like run, test, or distribute your code, and 3) packages that this project depends upon. The following shows what your `package.json` looks like currently. It has some default metadata and a simple placeholder script that just runs the echo command when you execute `npm run test` from the console.
+
+```json
+{
+  "name": "npmtest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
+```
+
+With NPM initialized to work with your project, you can now use it to install a node package. As a simple example, we will install a package that knows how to tell jokes. This package is called `give-me-a-joke`. You can search for it on the [NPM website](https://www.npmjs.com/), see how often it is installed, examine the source code, and learn about who created it. You install the package using `npm install` followed by the name of the package.
+
+```sh
+➜  npm install give-me-a-joke
+```
+
+If you again examine the contents of the `package.json` file you will see a reference to the newly installed package dependency. If you decide you no longer want a package dependency you can always remove it with the `npm uninstall <package name here>` console command.
+
+With the dependency added, the unnecessary metadata removed, the addition of a useful script to run the program, and also adding a description, the `package.json` file should look like this:
+
+```json
+{
+  "name": "npmtest",
+  "version": "1.0.0",
+  "description": "Simple Node.js demo",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "node index.js"
+  },
+  "dependencies": {
+    "give-me-a-joke": "^0.5.1"
+  }
+}
+```
+
+⚠ Note that when you start installing package dependencies, NPM will create an additional file named `package-lock.json` and a directory named `node_modules` in your project directory. The `node_modules` directory contains the actual JavaScript files for the package and all of its dependent packages. As you install several packages this directory will start to get very large. You do **not** want to check this directory into your source control system since it can be very large and can be rebuilt using the information contained in the `package.json` and `package-lock.json` files. So make sure you include `node_modules` in your `.gitignore` file.
+
+When you clone your source code from GitHub to a new location, the first thing you should do is run `npm install` in the project directory. This will cause NPM to download all of the previously installed packages and recreate the `node_modules` directory.
+
+The `package-lock.json` file tracks the version of the package that you installed. That way if you rebuild your `node_modules` directory you will have the version of the package you initially installed and not the latest available version, which might not be compatible with your code.
+
+With NPM and the joke package installed, you can now use the joke package in a JavaScript file by referencing the package name as a parameter to the `require` function. This is then followed by a call to the joke object's `getRandomDadJoke` function to actually generate a joke. Create a file named `index.js` and paste the following into it.
+
+**index.js**
+
+```js
+const giveMeAJoke = require('give-me-a-joke');
+giveMeAJoke.getRandomDadJoke((joke) => {
+  console.log(joke);
+});
+```
+
+If you run this code using `node.js` you should get a result similar to the following.
+
+```sh
+➜  node index.js
+What do you call a fish with no eyes? A fsh.
+```
+
+This may seem like a lot of work but after you do it a few times it will begin to feel natural. Just remember the main steps.
+
+1. Create your project directory
+1. Initialize it for use with NPM by running `npm init -y`
+1. Make sure `.gitignore` file contains `node_modules`
+1. Install any desired packages with `npm install <package name here>`
+1. Add `require('<package name here>')` to your application's JavaScript
+1. Use the code the package provides in your JavaScript
+1. Run your code with `node index.js`
+
+## Creating a web service
+
+With JavaScript we can write code that listens on a network port (e.g. 80, 443, 3000, or 8080), receives HTTP requests, processes them, and then responds. We can use this to create a simple web service that we then execute using Node.js.
+
+First create your project.
+
+```sh
+➜ mkdir webservicetest
+➜ cd webservicetest
+➜ npm init -y
+```
+
+Now, open VS Code and create a file named `index.js`. Paste the following code into the file and save.
+
+```js
+const http = require('http');
+const server = http.createServer(function (req, res) {
+  res.writeHead(200, { 'Content-Type': 'text/html' });
+  res.write(`<h1>Hello Node.js! [${req.method}] ${req.url}</h1>`);
+  res.end();
+});
+
+server.listen(8080, () => {
+  console.log(`Web service listening on port 8080`);
+});
+```
+
+This code uses the Node.js built-in `http` package to create our HTTP server using the `http.createServer` function along with a callback function that takes a request (`req`) and response (`res`) object. That function is called whenever the server receives an HTTP request. In our example, the callback always returns the same HTML snippet, with a status code of 200, and a Content-Type header, no matter what request is made. Basically this is just a simple dynamically generated HTML page. A real web service would examine the HTTP path and return meaningful content based upon the purpose of the endpoint.
+
+The `server.listen` call starts listening on port 8080 and blocks until the program is terminated.
+
+We execute the program by going back to our console window and running Node.js to execute our index.js file. If the service starts up correctly then it should look like the following.
+
+```sh
+➜ node index.js
+Web service listening on port 8080
+```
+
+You can now open your browser and point it to `localhost:8080` and view the result. The interaction between the JavaScript, node, and the browser looks like this.
+
+![Node HTTP](webServicesNodeHttp.jpg)
+
+Use different URL paths in the browser and note that it will echo the HTTP method and path back in the document. You can kill the process by pressing `CTRL-C` in the console.
+
+Note that you can also start up Node and execute the `index.js` code directly in VS Code. To do this open index.js in VS Code and press the 'F5' key. This should ask you what program you want to run. Select `node.js`. This starts up Node.js with the `index.js` file, but also attaches a debugger so that you can set breakpoints in the code and step through each line of code.
+
+⚠ Make sure you complete the above steps. For the rest of the course you will be executing your code using Node.js to run your backend code and serve up your frontend code to the browser. This means you will no longer be using the `VS Code Live Server extension` to serve your frontend code in the browser.
+
+## Deno and Bun
+
+You should be aware that Ryan has created a successor to Node.js called [`Deno`](https://deno.land/). This version is more compliant with advances in ECMAScript and has significant performance enhancements. There are also competitor server JavaScript applications. One of the more interesting rising stars is called [`Bun`](https://bun.sh/). If you have the time you should learn about them.
+
+# 22
+
+vite
+what does vite do
+
+For our toolchain we are going to use Vite. Vite bundles your code quickly, has great debugging support, and allows you to easily support JSX, TypeScript, and different CSS flavors. To get started with Vite, let's first build a simple web application. Later we will convert Simon over to React using Vite. This will teach you what you need to know in order to move your startup to React.
+
+# file 1
+
+# Vite
+
+📖 **Deeper dive reading**: [Vite](https://vitejs.dev/guide/)
+
+Now that we have covered the basics of React, we want to extend our usage to include a full web framework toolchain that allows us to use JSX, minification, polyfills, and bundling for our Simon and startup applications. One common way for configuring your project to take advantage of these technologies is to use a Command Line Interface (CLI) to initially set up a web application. Using a CLI saves you the trouble of configuring the toolchain parameters and gets you quickly started with a default application.
+
+For our toolchain we are going to use [Vite](https://vitejs.dev/). Vite bundles your code quickly, has great debugging support, and allows you to easily support JSX, TypeScript, and different CSS flavors. To get started with Vite, let's first build a simple web application. Later we will convert Simon over to React using Vite. This will teach you what you need to know in order to move your startup to React.
+
+To create a new React-based web application using Vite, open your console and run the following commands:
+
+```sh
+npm create vite@latest demoVite -- --template react
+cd demoVite
+npm install
+npm run dev
+```
+
+This will create a new web application in the `demoVite` directory, download the required 3rd party packages, and start up the application using a local HTTP debugging server. You can tell Vite to open your browser to the URL that is hosting your application by pressing `o`, or press `h` to see all of the Vite CLI options.
+
+![Vite Demo](viteDemo.gif)
+
+Congratulations! You have just created your first React-enabled web application.
+
+Once you have played around with the application in your browser, you can return to your console and stop Vite from hosting the application by pressing `q`.
+
+## Generated project
+
+Now, let's explore the application files that Vite created. From the console, use VS Code (`code .`) to open the project directory and take a look at the files.
+
+| Directory    | File              | Purpose                                                                                                                   |
+| ------------ | ----------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| ./           |                   |                                                                                                                                |
+|              | index.html        | Primary page for the application. This is the starting point to load all of the JSX components beginning with `main.jsx`. |
+|              | package.json      | NPM definition for package dependencies and script commands. This is what maps `npm run dev` to actually start up Vite.   |
+|              | package-lock.json | Version constraints for included packages (do not edit this).                                                             |
+|              | vite.config.js    | Configuration setting for Vite. Specifically this sets up React for development.                                          |
+| ./public     |                   |                                                                                                                           |
+|              | vite.svg          | Vite logo for use as favicon and for display in the app.                                                                  |
+| ./src        |                   |                                                                                                                           |
+|              | main.jsx          | Entry point for code execution. This simply loads the App component found in `App.jsx`.                                   |
+|              | index.css         | CSS for the entire application.                                                                                           |
+|              | App.jsx           | JSX for top level application component. This displays the logs and implements the click counter.                         |
+|              | App.css           | CSS for the top level application component.                                                                              |
+| ./src/assets |                   |                                                                                                                           |
+|              | react.svg         | React logo for display in the app.                                                                                        |
+
+The main files in the application are `index.html`, `main.jsx`, and `App.jsx`. The browser loads `index.html` which provides the HTML element (`#root`) that the React application will be injected into. It also includes the script element to load `main.jsx`.
+
+`main.jsx` creates the React application by associating the `#root` element with the `App` component found in `App.jsx`. This causes all of the component render functions to execute and the generated HTML, CSS, and JavaScript to be executed in `index.html`.
+
+![File relationship](reactFiles.png)
+
+## JSX vs JS
+
+The `Vite` CLI uses the `.jsx` extension for JSX files instead of the JavaScript `.js` extension. The Babel transpiler will work with either one, but some editor tools will work differently based upon the extension. For this reason, you should prefer `.jsx` for files that contain JSX. The developers at AirBNB had an interesting [conversation](https://github.com/airbnb/javascript/pull/985) on this topic that you might browse if you would like to consider the differing opinions on this subject.
+
+## Building a production release
+
+When you execute `npm run dev` you are bundling the code to a temporary directory that the Vite debug HTTP server loads from. When you want to bundle your application so that you can deploy to a production environment you need to run `npm run build`. This executes the `build` script found in your `package.json` and invokes the `Vite` CLI. `vite build` transpiles, minifies, injects the proper JavaScript, and then outputs everything to a deployment-ready version contained in a distribution subdirectory named `dist`.
+
+```sh
+➜  npm run build
+
+> demovite@0.0.0 build
+> vite build
+
+vite v4.3.7 building for production...
+✓ 34 modules transformed.
+dist/index.html                   0.45 kB │ gzip:  0.30 kB
+dist/assets/react-35ef61ed.svg    4.13 kB │ gzip:  2.14 kB
+dist/assets/index-51439b3f.css    1.42 kB │ gzip:  0.74 kB
+dist/assets/index-58d24859.js   143.42 kB │ gzip: 46.13 kB
+✓ built in 382ms
+```
+
+## Deploying a production release
+
+The deployment script for Simon React (`deployReact.sh`) creates a production distribution by calling `npm run build` and then copying the resulting `dist` directory to your production server.
+
+Take some time to build a production release by running `npm run build`. Then examine what Vite actually builds by examining the `dist` directory. For example, if you look at the `dist/assets` directory you will see the bundled and minified JavaScript and CSS files.
+
+## ☑ Assignment
+
+Now that you have reviewed the application in VS Code, take a moment to manipulate the files and see what impact your changes have. If you break the application, and can't figure out how to fix it, just delete the demo directory and start again. The more you play around with this code, the better you will understand how all the pieces of the application fit together.
+
+Make the following modifications:
+
+1. Alter the CSS to change background and text colors to something different.
+1. Replace the text in the App component with your name.
+1. Change the counter to increment by 10 instead of by one.
+
+After these changes, the application should look similar to this:
+
+![React altered](reactAppAltered.png)
+
+When you are done, submit a screen capture of the altered application to the Canvas assignment.
+
+Don't forget to update your GitHub startup repository `notes.md` with all of the things you learned and want to remember.
+
+# file 2
+
+Getting Started
+Overview
+Vite (French word for "quick", pronounced /vit/
+
+, like "veet") is a build tool that aims to provide a faster and leaner development experience for modern web projects. It consists of two major parts:
+
+    A dev server that provides rich feature enhancements over native ES modules, for example extremely fast Hot Module Replacement (HMR).
+
+    A build command that bundles your code with Rollup, pre-configured to output highly optimized static assets for production.
+
+Vite is opinionated and comes with sensible defaults out of the box. Read about what's possible in the Features Guide. Support for frameworks or integration with other tools is possible through Plugins. The Config Section explains how to adapt Vite to your project if needed.
+
+Vite is also highly extensible via its Plugin API and JavaScript API with full typing support.
+
+You can learn more about the rationale behind the project in the Why Vite section.
+Browser Support
+
+During development, Vite sets esnext as the transform target, because we assume a modern browser is used and it supports all of the latest JavaScript and CSS features. This prevents syntax lowering, letting Vite serve modules as close as possible to the original source code.
+
+For the production build, by default Vite targets browsers that support native ES Modules, native ESM dynamic import, and import.meta. Legacy browsers can be supported via the official @vitejs/plugin-legacy. See the Building for Production section for more details.
+Trying Vite Online
+
+You can try Vite online on StackBlitz. It runs the Vite-based build setup directly in the browser, so it is almost identical to the local setup but doesn't require installing anything on your machine. You can navigate to vite.new/{template} to select which framework to use.
+
+The supported template presets are:
+JavaScript	TypeScript
+vanilla	vanilla-ts
+vue	vue-ts
+react	react-ts
+preact	preact-ts
+lit	lit-ts
+svelte	svelte-ts
+solid	solid-ts
+qwik	qwik-ts
+Scaffolding Your First Vite Project
+
+Compatibility Note
+
+Vite requires Node.js version 18+. 20+. However, some templates require a higher Node.js version to work, please upgrade if your package manager warns about it.
+NPM
+Yarn
+PNPM
+Bun
+bash
+
+$ npm create vite@latest
+
+Then follow the prompts!
+
+You can also directly specify the project name and the template you want to use via additional command line options. For example, to scaffold a Vite + Vue project, run:
+bash
+
+# npm 7+, extra double-dash is needed:
+npm create vite@latest my-vue-app -- --template vue
+
+# yarn
+yarn create vite my-vue-app --template vue
+
+# pnpm
+pnpm create vite my-vue-app --template vue
+
+# bun
+bunx create-vite my-vue-app --template vue
+
+See create-vite for more details on each supported template: vanilla, vanilla-ts, vue, vue-ts, react, react-ts, react-swc, react-swc-ts, preact, preact-ts, lit, lit-ts, svelte, svelte-ts, solid, solid-ts, qwik, qwik-ts.
+Community Templates
+
+create-vite is a tool to quickly start a project from a basic template for popular frameworks. Check out Awesome Vite for community maintained templates that include other tools or target different frameworks.
+
+For a template at https://github.com/user/project, you can try it out online using https://github.stackblitz.com/user/project (adding .stackblitz after github to the URL of the project).
+
+You can also use a tool like degit to scaffold your project with one of the templates. Assuming the project is on GitHub and uses main as the default branch, you can create a local copy using:
+bash
+
+npx degit user/project#main my-project
+cd my-project
+
+npm install
+npm run dev
+
+index.html and Project Root
+
+One thing you may have noticed is that in a Vite project, index.html is front-and-central instead of being tucked away inside public. This is intentional: during development Vite is a server, and index.html is the entry point to your application.
+
+Vite treats index.html as source code and part of the module graph. It resolves <script type="module" src="..."> that references your JavaScript source code. Even inline <script type="module"> and CSS referenced via <link href> also enjoy Vite-specific features. In addition, URLs inside index.html are automatically rebased so there's no need for special %PUBLIC_URL% placeholders.
+
+Similar to static http servers, Vite has the concept of a "root directory" which your files are served from. You will see it referenced as <root> throughout the rest of the docs. Absolute URLs in your source code will be resolved using the project root as base, so you can write code as if you are working with a normal static file server (except way more powerful!). Vite is also capable of handling dependencies that resolve to out-of-root file system locations, which makes it usable even in a monorepo-based setup.
+
+Vite also supports multi-page apps with multiple .html entry points.
+Specifying Alternative Root
+
+Running vite starts the dev server using the current working directory as root. You can specify an alternative root with vite serve some/sub/dir. Note that Vite will also resolve its config file (i.e. vite.config.js) inside the project root, so you'll need to move it if the root is changed.
+Command Line Interface
+
+In a project where Vite is installed, you can use the vite binary in your npm scripts, or run it directly with npx vite. Here are the default npm scripts in a scaffolded Vite project:
+json
+
+{
+  "scripts": {
+    "dev": "vite", // start dev server, aliases: `vite dev`, `vite serve`
+    "build": "vite build", // build for production
+    "preview": "vite preview" // locally preview production build
+  }
+}
+
+You can specify additional CLI options like --port or --open. For a full list of CLI options, run npx vite --help in your project.
+
+Learn more about the Command Line Interface
+Using Unreleased Commits
+
+If you can't wait for a new release to test the latest features, you will need to clone the vite repo to your local machine and then build and link it yourself (pnpm is required):
+bash
+
+git clone https://github.com/vitejs/vite.git
+cd vite
+pnpm install
+cd packages/vite
+pnpm run build
+pnpm link --global # use your preferred package manager for this step
+
+Then go to your Vite based project and run pnpm link --global vite (or the package manager that you used to link vite globally). Now restart the development server to ride on the bleeding edge!
