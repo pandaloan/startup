@@ -1131,4 +1131,254 @@ Code 	Text 	Meaning
 503 	Service unavailable 	The server is temporarily down. The client should try again with an exponential back off.
 
 
+# Final Notes
+Server Notes File
+i-032171a33480d4aad
+
+https://us-east-1.console.aws.amazon.com/ec2/home?region=us-east-1#Instances:instanceId=i-032171a33480d4aad
+
+public IPv4 address: 54.236.237.156
+
+place single quotes '' around files and directories that have spaces in their names when entering them into the terminal
+
+stopping a server is NOT the same as terminating it
+
+
+
+****Important****
+
+from https://github.com/webprogramming260/.github/blob/main/profile/webServers/amazonWebServicesEc2/amazonWebServicesEc2.md
+
+Assigning an elastic IP address will change the IP address for your server, but it will not change again until you release the elastic IP address. If you do terminate your server and create a new one, you can again associate the same elastic IP address with your new server.
+
+Note that your elastic IP address is allocated until your release it, not until you terminate your instance. So make sure you release it when you no longer need it. Otherwise you will get a nasty $3 bill every month.****
+**********
+
+
+
+***Elastic IP address: 52.206.31.215
+
+To shell into production environment server:
+
+ssh -i ~/Documents/'CS 260'/'First Key Pair.pem' ubuntu@52.206.31.215
+
+
+
+albinochipmunk.click
+
+http://albinochipmunk.click/
+
+
+vi - to enter insert mode, press i. to return to command mode, press esc. to exit from command mode, press q. To save and quit, be in command mode, then type :wq
+
+
+https://albinochipmunk.click/
+https://startup.albinochipmunk.click/
+https://simon.albinochipmunk.click/
+
+
+enter in terminal to deploy to startup: (deploy while in startup directory)
+./deployFiles.sh -k ~/Documents/'CS 260'/'First Key Pair.pem' -h albinochipmunk.click -s startup
+
+to deploy to simon: (deploy while in Simon/simon-css or simon-html or simon-whatever)
+./deployFiles.sh -k ~/Documents/'CS 260'/'First Key Pair.pem' -h albinochipmunk.click -s simon
+
+./deployService.sh -k ~/Documents/'CS 260'/'First Key Pair.pem' -h albinochipmunk.click -s simon
+
+run from in simon-db or whatever
+
+
+./deployService.sh -k ~/Documents/'CS 260'/'First Key Pair.pem' -h albinochipmunk.click -s startup
+
+git clone saves repo to Abby on laptop
+
+
+https://www.youtube.com/watch?v=4ARsthVnCTg
+
+
+git clone saves repo to Abby on laptop
+
+
+https://www.youtube.com/watch?v=4ARsthVnCTg
+
+
+
+
+//run in vs code console?
+npm init -y
+npm install ws
+
+
+
+
+
+
+Abby@RazorCrest MINGW64 ~/testExpress
+$ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 15916  100 15916    0     0  36130      0 --:--:-- --:--:-- --:--:-- 36337
+=> nvm is already installed in /c/Users/Abby/.nvm, trying to update using git
+=> => Compressing and cleaning up git repository
+
+=> Profile not found. Tried ~/.bashrc, ~/.bash_profile, ~/.zprofile, ~/.zshrc, and ~/.profile.
+=> Create one of them and run this script again
+   OR
+=> Append the following lines to the correct file yourself:
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+=> Close and reopen your terminal to start using nvm or run the following to use it now:
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+
+Abby@RazorCrest MINGW64 ~/testExpress
+$ . ~/.nvm/nvm.sh
+Abby@RazorCrest MINGW64 ~/testExpress
+$ . ~/.nvm/nvm.sh
+
+Abby@RazorCrest MINGW64 ~/testExpress
+Now using node v20.9.0 (npm v10.1.0)
+Installing latest LTS version.
+Abby@RazorCrest MINGW64 ~/testExpress
+$ node -v
+v20.9.0
+
+
+curl/service mental model is still unclear to me - ask about it
+
+$lt = less than
+$gte = greater than or equal
+go over dataServices.md
+
+mongodb+srv://abbykemp:<password>@cluster0.iwhkrhg.mongodb.net/?retryWrites=true&w=majority
+
+mongodb+srv://abbykemp:<password>@cluster0.iwhkrhg.mongodb.net/
+
+
+???
+ubuntu@ip-172-31-39-48:~/services/startup$ scp -i ~/Documents/'CS 260'/'First Key Pair.pem' ubuntu@52.206.31.215 ~/services/startup/database.js ~/Documents/startup
+
+
+to run on local host:
+(ctrl c if needed)
+node index.js
+in browser: localhost:3000
+
+
+
+startup-react1 is a repo
+
+DON'T COMMIT STARTUP YET!!!
+
+node index.js from gitbash server folder to start back end
+
+# End server notes file
+#1. 33. HTTPS is secure and is on port 443, while HTTP is unsecured and available on port 80. Information that travels on the port 443 is encrypted using Secure Sockets Layer (SSL) or its new version, Transport Layer Security (TLS) and hence safer. The TLS 1.2 is the latest version which has fixed several recent vulnerabilities.
+
+Using HTTPS also helps minimize a Ransomware attack by identifying open ports and then blocking access with a firewall. It is highly advisable to access and transact on sites with HTTPS to protect yourself from malicious elements as it prevents your personal information, passwords, customer data, and business-critical data from being intercepted and stolen.
+
+port 22 is for ssh (secure shell protocol)
+
+#2 Status codes
+
+It is important that you use the standard HTTP status codes in your HTTP responses so that the client of a request can know how to interpret the response. The codes are partitioned into five blocks.
+
+    1xx - Informational.
+    2xx - Success.
+    3xx - Redirect to some other location, or that the previously cached resource is still valid.
+    4xx - Client errors. The request is invalid.
+    5xx - Server errors. The request cannot be satisfied due to an error on the server.
+
+Within those ranges here are some of the more common codes. See the MDN documentation for a full description of status codes.
+Code 	Text 	Meaning
+100 	Continue 	The service is working on the request
+200 	Success 	The requested resource was found and returned as appropriate.
+201 	Created 	The request was successful and a new resource was created.
+204 	No Content 	The request was successful but no resource is returned.
+304 	Not Modified 	The cached version of the resource is still valid.
+307 	Permanent redirect 	The resource is no longer at the requested location. The new location is specified in the response location header.
+308 	Temporary redirect 	The resource is temporarily located at a different location. The temporary location is specified in the response location header.
+400 	Bad request 	The request was malformed or invalid.
+401 	Unauthorized 	The request did not provide a valid authentication token.
+403 	Forbidden 	The provided authentication token is not authorized for the resource.
+404 	Not found 	An unknown resource was requested.
+408 	Request timeout 	The request takes too long.
+409 	Conflict 	The provided resource represents an out of date version of the resource.
+418 	I'm a teapot 	The service refuses to brew coffee in a teapot.
+429 	Too many requests 	The client is making too many requests in too short of a time period.
+500 	Internal server error 	The server failed to properly process the request.
+503 	Service unavailable 	The server is temporarily down. The client should try again with an exponential back off.
+
+#3 Content-Type
+
+The Content-Type representation header is used to indicate the original media type of the resource (prior to any content encoding applied for sending).
+
+In responses, a Content-Type header provides the client with the actual content type of the returned content. This header's value may be ignored, for example when browsers perform MIME sniffing; set the X-Content-Type-Options header value to nosniff to prevent this behavior.
+
+In requests, (such as POST or PUT), the client tells the server what type of data is actually sent.
+Header type 	Representation header
+Forbidden header name 	no
+CORS-safelisted response header 	yes
+CORS-safelisted request header 	yes, with the additional restriction that values can't contain a CORS-unsafe request header byte: 0x00-0x1F (except 0x09 (HT)), "():<>?@[\]{}, and 0x7F (DEL).
+It also needs to have a MIME type of its parsed value (ignoring parameters) of either application/x-www-form-urlencoded, multipart/form-data, or text/plain.
+Syntax
+http
+
+Content-Type: text/html; charset=utf-8
+Content-Type: multipart/form-data; boundary=something
+
+Directives
+
+media-type
+
+    The MIME type of the resource or the data.
+charset
+
+    The character encoding standard. Case insensitive, lowercase is preferred.
+boundary
+
+    For multipart entities the boundary directive is required. The directive consists of 1 to 70 characters from a set of characters (and not ending with white space) known to be very robust through email gateways. It is used to encapsulate the boundaries of the multiple parts of the message. Often, the header boundary is prepended with two dashes and the final boundary has two dashes appended at the end.
+
+Examples
+Content-Type in HTML forms
+
+In a POST request, resulting from an HTML form submission, the Content-Type of the request is specified by the enctype attribute on the <form> element.
+html
+
+<form action="/" method="post" enctype="multipart/form-data">
+  <input type="text" name="description" value="some text" />
+  <input type="file" name="myFile" />
+  <button type="submit">Submit</button>
+</form>
+
+The request looks something like this (less interesting headers are omitted here):
+http
+
+POST /foo HTTP/1.1
+Content-Length: 68137
+Content-Type: multipart/form-data; boundary=---------------------------974767299852498929531610575
+
+-----------------------------974767299852498929531610575
+Content-Disposition: form-data; name="description"
+
+some text
+-----------------------------974767299852498929531610575
+Content-Disposition: form-data; name="myFile"; filename="foo.txt"
+Content-Type: text/plain
+
+(content of the uploaded file foo.txt)
+-----------------------------974767299852498929531610575--
+
+Specifications
+Specification
+HTTP Semantics
+# status.206
+HTTP Semantics
+# field.content-type
+
+#4
+
+
 
